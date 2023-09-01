@@ -16,17 +16,8 @@ function Game({ channel }) {
     const [playersJoined, setPlayersJoined] = useState(channel.state.watcher_count === 2);
     const [state, dispatch] = useReducer(tttReducer, initialState);
     const { board, player } = state
-
-    channel.on("user.watching.start", () => {
-        setPlayersJoined(channel.state.watcher_count === 2);
-    });
-    channel.on("user.watching.stop", () => {
-        setPlayersJoined(channel.state.watcher_count === 2);
-    });
-    if (!playersJoined) {
-        // dispatch({ type: 'RESET' })
-        return (<div>Waiting for other player to join...</div>);
-    }
+    // const watch = channel.state.watchers !== {} ? channel.state.watchers : channel.state.watchers[0].id
+    // console.log(watch)
 
     const handleClick = async (x, y) => {
         dispatch({ type: 'CLICK', payload: { x, y } })
@@ -38,6 +29,23 @@ function Game({ channel }) {
         })
     }
 
+    const reset = async () => {
+        await channel.sendEvent({
+            type: 'reset'
+        })
+        dispatch({ type: 'RESET', state: initialState })
+    }
+
+    channel.on("user.watching.start", () => {
+        setPlayersJoined(channel.state.watcher_count === 2);
+    });
+    channel.on("user.watching.stop", () => {
+        setPlayersJoined(channel.state.watcher_count === 2);
+        if (!playersJoined) {
+            reset()
+        }
+    });
+
     channel.on((event) => {
         if (event.type == "game-move" && event.user.id !== client.userID) {
             const { x, y, player } = event.data
@@ -48,16 +56,15 @@ function Game({ channel }) {
         }
     })
 
+    if (!playersJoined) {
+        return (<div>Waiting for other player to join...</div>);
+    }
+
     return (
         <div className="gameContainer">
             <Board board={board} handleClick={handleClick} />
             <button
-                onClick={async () => {
-                    await channel.sendEvent({
-                        type: 'reset'
-                    })
-                    dispatch({ type: 'RESET', state: initialState })
-                }
+                onClick={() => { reset() }
                 }>
                 Reset
             </button>
