@@ -1,21 +1,33 @@
-import { clone } from "./utility_funcs"
+import { checkForDraw, checkForWin, clone, flatten } from "./utility_funcs"
 
 function tttReducer(state, action) {
+
+    if (state.status === 'finish' && action.type !== 'RESET') {
+        return state;
+    }
+
     switch (action.type) {
         case 'CLICK': {
             const { x, y } = action.payload;
             const nextState = clone(state);
             const { board, player, turn } = nextState;
-            if (player !== turn || board[y][x]) {
+            if (player !== action.currentPlayer || board[y][x]) {
                 return state;
             }
-            nextState.turn = turn === 'X' ? 'O' : 'X';
-            board[y][x] = player;
-            console.log('initial turn: ', nextState.turn)
-            console.log('initial player: ', nextState.player)
-            nextState.player = player === 'X' ? 'O' : 'X';
-            console.log('final turn: ', nextState.turn)
-            console.log('final player: ', nextState.player)
+            board[y][x] = turn;
+            const flatGrid = flatten(board)
+            console.log(flatGrid)
+            if (checkForWin(flatGrid)) {
+                nextState.status = "finish";
+                return nextState;
+            }
+            if (checkForDraw(flatGrid)) {
+                return action.default
+            }
+            if (action.changeTurn == 'true') {
+                nextState.player = action.players[turn];
+                nextState.turn = turn === 'X' ? 'O' : 'X'
+            }
             return nextState;
         }
 
@@ -28,24 +40,4 @@ function tttReducer(state, action) {
     }
 }
 
-function replicaReducer(state, action) {
-    switch (action.type) {
-        case 'REPLICATE': {
-            const { x, y, player } = action.payload;
-            const nextState = clone(state);
-            const { board } = nextState;
-
-            board[y][x] = player;
-
-            nextState.player = player === 'X' ? 'O' : 'X';
-            nextState.turn = nextState.player;
-            console.log(nextState)
-            return nextState;
-        }
-
-        default:
-            return state;
-    }
-}
-
-export { tttReducer, replicaReducer }
+export { tttReducer }

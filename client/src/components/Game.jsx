@@ -8,51 +8,57 @@ import { useChatContext } from 'stream-chat-react';
 function Game({ channel }) {
 
     const client = useChatContext()
+    const players = Object.keys(channel.state.members)
+    const NEXT_PLAYER = {
+        'X': players[1],
+        'O': players[0]
+    }
+    const NEXT_PLAYER_TEXT = {
+        'start': player => `It is player ${channel.state.members[player].user.name}'s turn.`,
+        'finish': () => null
+    }
+    const GAME_STATUS_TEXT = {
+        start: () => null,
+        finish: player => `Player ${channel.state.members[player].user.name} has won!`
+    }
     const initialState = {
         board: newTicTacToeBoard(3, 3, () => ""),
-        player: 'X',
-        turn: 'X'
+        player: players[0],
+        turn: 'X',
+        status: 'start'
     }
+
     const [playersJoined, setPlayersJoined] = useState(channel.state.watcher_count === 2);
     const [state, dispatch] = useReducer(tttReducer, initialState);
-    const { board, player } = state
-    // const watch = channel.state.watchers !== {} ? channel.state.watchers : channel.state.watchers[0].id
-    // console.log(watch)
+    const { board, player, turn, status } = state
 
     const handleClick = async (x, y) => {
-        dispatch({ type: 'CLICK', payload: { x, y } })
         await channel.sendEvent({
             type: 'game-move',
             data: {
-                x, y, player
+                x, y, player, turn
             }
         })
     }
-
     const reset = async () => {
         await channel.sendEvent({
             type: 'reset'
         })
-        dispatch({ type: 'RESET', state: initialState })
     }
 
-    channel.on("user.watching.start", () => {
-        setPlayersJoined(channel.state.watcher_count === 2);
-    });
-    channel.on("user.watching.stop", () => {
-        setPlayersJoined(channel.state.watcher_count === 2);
-        if (!playersJoined) {
-            reset()
-        }
-    });
-
     channel.on((event) => {
-        if (event.type == "game-move" && event.user.id !== client.userID) {
-            const { x, y, player } = event.data
-            dispatch({ type: 'CLICK', payload: { x, y }, player: player })
+        if (event.type == "game-move") {
+            const { x, y } = event.data
+            dispatch({ type: 'CLICK', payload: { x, y }, currentPlayer: event.user.id, changeTurn: 'true', players: NEXT_PLAYER, default: initialState })
+            if (event.user.id !== client.client.userID) {
+                console.log('event: ', event.user.id)
+                console.log('client: ', client.client.userID)
+                dispatch({ type: 'CLICK', payload: { x, y }, changeTurn: 'false', default: initialState })
+            }
         } else if (event.type == "reset") {
             dispatch({ type: 'RESET', state: initialState })
-
+        } else if (event.type == "user.watching.start" || event.type == "user.watching.stop") {
+            setPlayersJoined(channel.state.watcher_count === 2);
         }
     })
 
@@ -62,6 +68,7 @@ function Game({ channel }) {
 
     return (
         <div className="gameContainer">
+            <div>{NEXT_PLAYER_TEXT[status](player)}{GAME_STATUS_TEXT[status](player)}</div>
             <Board board={board} handleClick={handleClick} />
             <button
                 onClick={() => { reset() }
