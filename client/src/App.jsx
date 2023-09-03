@@ -1,11 +1,10 @@
 import { useState } from "react";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-import JoinGame from "./components/JoinGame";
 import { StreamChat } from "stream-chat";
 import { Chat } from "stream-chat-react";
 import Cookies from "universal-cookie";
-
+import ChooseGame from "./components/chooseGame";
 
 function App() {
   const apiKey = import.meta.env.VITE_apiKey;
@@ -47,7 +46,7 @@ function App() {
     <div className="App">
       {isAuth ? (
         <Chat client={client}>
-          <JoinGame />
+          <ChooseGame />
           <button onClick={logout}>Log Out</button>
         </Chat>
       ) : (

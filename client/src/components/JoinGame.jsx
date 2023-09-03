@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-import { useChatContext, Channel } from "stream-chat-react";
-import Game from "./Game"
+import { useChatContext } from "stream-chat-react";
+import Game from "./Game";
 
-function JoinGame() {
+function JoinGame({ game }) {
 
     const [rivalUserName, setRivalUserName] = useState("");
     const [channel, setChannel] = useState(null);
@@ -20,12 +21,11 @@ function JoinGame() {
         await newChannel.watch();
         setChannel(newChannel);
     }
+    console.log(game)
     return (
         <>
             {channel ? (
-                <Channel channel={channel}>
-                    <Game channel={channel} />
-                </Channel>
+                <Game channel={channel} game={game}></Game>
             ) : (
                 <div className='joinGame'>
                     <h4>Create Game</h4>
