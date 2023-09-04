@@ -6,28 +6,26 @@ import MiniKahootGame from "./MiniKahootGame"
 import TicTacToeGame from "./TicTacToeGame"
 import { Channel } from "stream-chat-react";
 
-function Game({ channel, game }) {
-    console.log(game)
+function Game({ channel, setChannel, game }) {
+
     if (game === 'TicTacToe') {
-        console.log(channel)
         return (
             <Channel channel={channel}>
-                <TicTacToeGame channel={channel}></TicTacToeGame>
+                <TicTacToeGame channel={channel} setChannel={setChannel} game={game}></TicTacToeGame>
             </Channel>
         )
     }
     if (game === 'Connect4') {
-        console.log('no heree')
         return (
             <Channel channel={channel}>
-                <Connect4Game channel={channel}></Connect4Game>
+                <Connect4Game channel={channel} setChannel={setChannel} game={game}></Connect4Game>
             </Channel>
         )
     }
     if (game === 'MiniKahoot') {
         return (
             <Channel channel={channel}>
-                <MiniKahootGame channel={channel}></MiniKahootGame>
+                <MiniKahootGame channel={channel} setChannel={setChannel}></MiniKahootGame>
             </Channel>
         )
     }

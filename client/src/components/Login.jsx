@@ -11,7 +11,6 @@ function Login({ setIsAuth }) {
     const login = () => {
         try {
             Axios.post("http://localhost:3001/login", { userName, password }).then(res => {
-                console.log(res.data)
                 const { firstName, lastName, userName, token, userID } = res.data;
                 cookies.set("token", token);
                 cookies.set("userID", userID);

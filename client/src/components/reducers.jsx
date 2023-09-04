@@ -40,4 +40,18 @@ function tttReducer(state, action) {
     }
 }
 
-export { tttReducer }
+
+function c4Reducer(state, action) {
+    switch (action.type) {
+        case 'CLICK': {
+            return state
+        }
+        case 'RESET': {
+            return state
+        }
+        default:
+            return state;
+    }
+}
+
+export { tttReducer, c4Reducer }

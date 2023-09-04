@@ -3,7 +3,7 @@ const clone = (x) => JSON.parse(JSON.stringify(x))
 const generateGrid = (rows, columns, mapper) => {
     return Array(rows).fill().map(() => Array(columns).fill().map(mapper))
 }
-const newTicTacToeBoard = (rows, columns, mapper) => generateGrid(rows, columns, mapper);
+const newBoard = (rows, columns, mapper) => generateGrid(rows, columns, mapper);
 
 const winningPatterns = [
     [0, 1, 2],
@@ -50,4 +50,4 @@ function checkForDraw(flatGrid) {
     )
 }
 
-export { clone, generateGrid, newTicTacToeBoard, winningPatterns, flatten, checkValues, checkForWin, checkForDraw };
+export { clone, generateGrid, newBoard, winningPatterns, flatten, checkValues, checkForWin, checkForDraw };

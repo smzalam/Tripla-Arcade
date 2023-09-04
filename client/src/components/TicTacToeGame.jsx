@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useReducer, useState } from 'react'
-import { newTicTacToeBoard } from './utility_funcs';
+import { newBoard } from './utility_funcs';
 import { tttReducer } from './reducers';
 import Board from './Board';
-import { useChatContext } from 'stream-chat-react';
+import { useChatContext, Window, MessageList, MessageInput } from 'stream-chat-react';
 
-function TicTacToeGame({ channel }) {
-    console.log(channel)
+function TicTacToeGame({ channel, setChannel, game }) {
     const client = useChatContext()
     const players = Object.keys(channel.state.members)
     const NEXT_PLAYER = {
@@ -22,7 +21,7 @@ function TicTacToeGame({ channel }) {
         finish: player => `Player ${channel.state.members[player].user.name} has won!`
     }
     const initialState = {
-        board: newTicTacToeBoard(3, 3, () => ""),
+        board: newBoard(3, 3, () => ""),
         player: players[0],
         turn: 'X',
         status: 'start'
@@ -63,20 +62,33 @@ function TicTacToeGame({ channel }) {
     })
 
     if (!playersJoined) {
-        return (<div>Waiting for other player to join...</div>);
+        return (
+            <>
+                <div>Waiting for other player to join...</div>
+                <button onClick={async () => {
+                    await channel.stopWatching();
+                    setChannel(null);
+                }}>Exit</button>            </>
+        );
     }
 
     return (
         <div className="gameContainer">
             <div>{NEXT_PLAYER_TEXT[status](player)}{GAME_STATUS_TEXT[status](player)}</div>
-            <Board board={board} handleClick={handleClick} />
+            <Board board={board} handleClick={handleClick} game={game} />
             <button
                 onClick={() => { reset() }
                 }>
                 Reset
             </button>
-            {/* CHAT */}
-            {/* LEAVE GAME BUTTON */}
+            <Window>
+                <MessageList disableDateSeparator />
+                <MessageInput noFiles />
+            </Window>
+            <button onClick={async () => {
+                await channel.stopWatching();
+                setChannel(null);
+            }}>Exit</button>
         </div>
     );
 }

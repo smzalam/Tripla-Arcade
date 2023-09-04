@@ -2,11 +2,13 @@
 import { useState } from "react";
 import { useChatContext } from "stream-chat-react";
 import Game from "./Game";
+import ChooseGame from "./ChooseGame";
 
 function JoinGame({ game }) {
 
     const [rivalUserName, setRivalUserName] = useState("");
     const [channel, setChannel] = useState(null);
+    const [exit, setExit] = useState(false)
     const { client } = useChatContext();
     const createChannel = async () => {
         const response = await client.queryUsers({ name: { $eq: rivalUserName } });
@@ -21,16 +23,24 @@ function JoinGame({ game }) {
         await newChannel.watch();
         setChannel(newChannel);
     }
-    console.log(game)
+
+    console.log(exit)
+
+    if (exit) {
+        return (
+            <ChooseGame></ChooseGame>
+        )
+    }
     return (
         <>
             {channel ? (
-                <Game channel={channel} game={game}></Game>
+                <Game channel={channel} setChannel={setChannel} game={game}></Game>
             ) : (
                 <div className='joinGame'>
                     <h4>Create Game</h4>
                     <input placeholder='Username of rival...' onChange={(event) => { setRivalUserName(event.target.value) }} />
                     <button onClick={createChannel}>Join Game</button>
+                    <button onClick={() => setExit(true)}>Exit</button>
                 </div >
             )}
         </>

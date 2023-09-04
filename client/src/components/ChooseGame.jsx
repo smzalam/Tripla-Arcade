@@ -4,11 +4,13 @@ import JoinGame from './JoinGame'
 function ChooseGame() {
 
     const [game, setGame] = useState(null)
-    console.log(game)
+
     return (
         <>
             {game ? (
-                <JoinGame game={game}></JoinGame>
+                <>
+                    <JoinGame game={game}></JoinGame>
+                </>
             ) : (
                 <div>
                     <button onClick={() => setGame('TicTacToe')}>TicTacToe</button>

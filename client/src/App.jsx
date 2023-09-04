@@ -4,7 +4,7 @@ import SignUp from "./components/SignUp";
 import { StreamChat } from "stream-chat";
 import { Chat } from "stream-chat-react";
 import Cookies from "universal-cookie";
-import ChooseGame from "./components/chooseGame";
+import ChooseGame from "./components/ChooseGame"
 
 function App() {
   const apiKey = import.meta.env.VITE_apiKey;
