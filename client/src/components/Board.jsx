@@ -18,7 +18,19 @@ function Board({ board, handleClick, game }) {
     return (
         <div className='inline-block'>
             <div className={style}>
-                {board.map((row, rowIdx) => row.map((cell, colIdx) => <Cell key={`${colIdx}-${rowIdx}`} cell={cell} handleClick={() => handleClick(colIdx, rowIdx)} game={game}></Cell>))}
+                {board.map(
+                    (row, rowIdx) =>
+                        row.map(
+                            (cell, colIdx) =>
+                                <Cell key={`${colIdx}-${rowIdx}`}
+                                    cell={cell}
+                                    handleClick={
+                                        () =>
+                                            handleClick(colIdx, rowIdx)}
+                                    game={game}>
+                                </Cell>
+                        )
+                )}
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useReducer, useState } from 'react'
 import { newBoard } from './utility_funcs';
-import { tttReducer } from './reducers';
+import { c4Reducer } from './reducers';
 import Board from './Board';
 import { useChatContext, Window, MessageList, MessageInput } from 'stream-chat-react';
 
@@ -28,7 +28,7 @@ function Connect4Game({ channel, setChannel, game }) {
     }
 
     const [playersJoined, setPlayersJoined] = useState(channel.state.watcher_count === 2);
-    const [state, dispatch] = useReducer(tttReducer, initialState);
+    const [state, dispatch] = useReducer(c4Reducer, initialState);
     const { board, player, turn, status } = state
 
     const handleClick = async (x, y) => {
