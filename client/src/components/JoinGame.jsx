@@ -24,8 +24,6 @@ function JoinGame({ game }) {
         setChannel(newChannel);
     }
 
-    console.log(exit)
-
     if (exit) {
         return (
             <ChooseGame></ChooseGame>

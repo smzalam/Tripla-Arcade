@@ -48,11 +48,18 @@ function Connect4Game({ channel, setChannel, game }) {
     channel.on((event) => {
         if (event.type == "game-move") {
             const { x, y } = event.data
-            dispatch({ type: 'CLICK', payload: { x, y }, currentPlayer: event.user.id, changeTurn: 'true', players: NEXT_PLAYER, default: initialState })
+            let emptyCellPlace = ''
+            console.log(board)
+            for (var i = 5; i >= 0; i--) {
+                if (board[i][x] === '') {
+                    emptyCellPlace = i
+                    break;
+                }
+            }
+            console.log('x: ', x, ' & e: ', emptyCellPlace)
+            dispatch({ type: 'CLICK', payload: { x, emptyCellPlace }, currentPlayer: event.user.id, changeTurn: 'true', players: NEXT_PLAYER, default: initialState })
             if (event.user.id !== client.client.userID) {
-                console.log('event: ', event.user.id)
-                console.log('client: ', client.client.userID)
-                dispatch({ type: 'CLICK', payload: { x, y }, changeTurn: 'false', default: initialState })
+                dispatch({ type: 'CLICK', payload: { x, emptyCellPlace }, currentPlayer: event.user.id, changeTurn: 'true', players: NEXT_PLAYER, default: initialState })
             }
         } else if (event.type == "reset") {
             dispatch({ type: 'RESET', state: initialState })
