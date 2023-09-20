@@ -25,11 +25,25 @@ function Login({ setIsAuth }) {
     }
 
     return (
-        <div className='login'>
-            <label htmlFor="">Login</label>
-            <input placeholder="User Name" onChange={(event) => { setUserName(event.target.value) }} />
-            <input placeholder="Password" onChange={(event) => { setPassword(event.target.value) }} />
-            <button onClick={login}>Login</button>
+        <div className='align-self-center border-0 grid grid-cols-3'>
+            {/* <label htmlFor="">Login</label> */}
+            <div className="col-span-2 grid grid-rows w-full">
+                <input
+                    placeholder="User Name"
+                    onChange={(event) => { setUserName(event.target.value) }}
+                    className="bg-white rounded-full h-max p-5 m-2"
+                />
+                <input
+                    placeholder="Password"
+                    onChange={(event) => { setPassword(event.target.value) }}
+                    className="bg-white rounded-full h-max p-5 m-2"
+                />
+            </div>
+            <button
+                onClick={login}
+                className="bg-yellow-500 hover:bg-lavender p-7 rounded-md w-max h-full">
+                Login
+            </button>
         </div>
     )
 }

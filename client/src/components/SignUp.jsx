@@ -24,13 +24,49 @@ function SignUp({ setIsAuth }) {
         }
     }
     return (
-        <div className='signUp'>
-            <label htmlFor="">Sign Up</label>
-            <input placeholder="First Name" onChange={(event) => { setUser({ ...user, firstName: event.target.value }) }} />
-            <input placeholder="Last Name" onChange={(event) => { setUser({ ...user, lastName: event.target.value }) }} />
-            <input placeholder="User Name" onChange={(event) => { setUser({ ...user, userName: event.target.value }) }} />
-            <input placeholder="Password" onChange={(event) => { setUser({ ...user, password: event.target.value }) }} />
-            <button onClick={signUp}>Sign Up</button>
+        <div className='row-start-2 align-self-center border-0 grid grid-cols-3'>
+            {/* <label htmlFor="">Sign Up</label> */}
+            <div className="col-span-2 grid grid-rows-3">
+                <div className="grid grid-cols-2 mb-2">
+                    <input
+                        placeholder="First Name"
+                        onChange={
+                            (event) => {
+                                setUser({ ...user, firstName: event.target.value })
+                            }
+                        }
+                        className="bg-white rounded-full w-7/8 p-3 place-self-center" />
+                    <input
+                        placeholder="Last Name"
+                        onChange={
+                            (event) => {
+                                setUser({ ...user, lastName: event.target.value })
+                            }
+                        }
+                        className="bg-white rounded-full w-7/8 p-3 place-self-center" />
+                </div>
+                <input
+                    placeholder="User Name"
+                    onChange={
+                        (event) => {
+                            setUser({ ...user, userName: event.target.value })
+                        }
+                    }
+                    className="bg-white rounded-full my-2 p-3" />
+                <input
+                    placeholder="Password"
+                    onChange={
+                        (event) => {
+                            setUser({ ...user, password: event.target.value })
+                        }
+                    }
+                    className="bg-white rounded-full my-2 p-3" />
+            </div>
+            <button
+                onClick={signUp}
+                className="bg-yellow-500 hover:bg-lavender p-7 rounded-md w-max h-full ml-2">
+                Sign Up
+            </button>
         </div>
     )
 }
