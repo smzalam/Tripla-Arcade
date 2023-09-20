@@ -50,10 +50,9 @@ function Home() {
     if (isAuth) {
         return (
             <div className="bg-text w-screen h-screen grid grid-rows-6">
-                <Nav isAuth={isAuth}></Nav>
+                <Nav isAuth={isAuth} logout={logout}></Nav>
                 <Chat client={client}>
                     <ChooseGame />
-                    <button onClick={logout}>Log Out</button>
                 </Chat>
             </div>
         )

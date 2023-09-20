@@ -18,7 +18,7 @@ export default {
         title: 'Ubuntu',
       },
       maxWidth: {
-        iconSize: '50%',
+        iconSize: '75%',
       }
     },
   },
