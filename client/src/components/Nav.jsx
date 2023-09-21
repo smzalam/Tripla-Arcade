@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import IMAGES from '../images/images'
 
-function Nav({ isAuth, logout }) {
+function Nav({ isAuth, logout, showNav }) {
     let menuVisiblity = '';
-    if (isAuth === true) {
+    if (isAuth === true && showNav === true) {
         menuVisiblity = 'grid'
     } else {
         menuVisiblity = 'hidden'

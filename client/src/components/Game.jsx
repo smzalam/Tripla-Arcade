@@ -6,13 +6,17 @@ import MiniKahootGame from "./MiniKahootGame"
 import TicTacToeGame from "./TicTacToeGame"
 import { Channel } from "stream-chat-react";
 
-function Game({ channel, setChannel, game }) {
+function Game({ channel, setChannel, game, setShowNav }) {
+
+    setShowNav(false);
 
     if (game === 'TicTacToe') {
         return (
-            <Channel channel={channel}>
-                <TicTacToeGame channel={channel} setChannel={setChannel} game={game}></TicTacToeGame>
-            </Channel>
+            <div className="row-span-5 grid grid-row-1">
+                <Channel channel={channel} className="w-full h-full">
+                    <TicTacToeGame channel={channel} setChannel={setChannel} game={game}></TicTacToeGame>
+                </Channel>
+            </div>
         )
     }
     if (game === 'Connect4') {

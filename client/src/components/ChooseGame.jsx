@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react'
 import JoinGame from './JoinGame'
 import IMAGES from '../images/images'
 
-function ChooseGame() {
+function ChooseGame({ setShowNav }) {
 
     const [game, setGame] = useState(null)
 
@@ -10,7 +11,7 @@ function ChooseGame() {
         <>
             {game ? (
                 <>
-                    <JoinGame game={game}></JoinGame>
+                    <JoinGame game={game} setShowNav={setShowNav} ></JoinGame>
                 </>
             ) : (
                 <div className='grid grid-rows-5 row-span-5 w-screen h-full'>

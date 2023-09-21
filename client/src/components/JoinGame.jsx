@@ -5,8 +5,9 @@ import Game from "./Game";
 import ChooseGame from "./ChooseGame";
 import IMAGES from '../images/images'
 
-function JoinGame({ game }) {
+function JoinGame({ game, setShowNav }) {
 
+    setShowNav(true);
     const [rivalUserName, setRivalUserName] = useState("");
     const [channel, setChannel] = useState(null);
     const [exit, setExit] = useState(false)
@@ -27,13 +28,13 @@ function JoinGame({ game }) {
 
     if (exit) {
         return (
-            <ChooseGame></ChooseGame>
+            <ChooseGame setShowNav={setShowNav}></ChooseGame>
         )
     }
     return (
         <>
             {channel ? (
-                <Game channel={channel} setChannel={setChannel} game={game}></Game>
+                <Game channel={channel} setChannel={setChannel} game={game} setShowNav={setShowNav}></Game>
             ) : (
                 <div className="row-span-3 grid grid-cols-6 h-full w-full">
                     <div className='col-start-2 col-span-4 grid grid-rows-4'>

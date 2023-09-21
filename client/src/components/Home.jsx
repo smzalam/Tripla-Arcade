@@ -17,6 +17,7 @@ function Home() {
     const token = cookies.get("token");
     const client = StreamChat.getInstance(apiKey);
     const [isAuth, setIsAuth] = useState(false);
+    const [showNav, setShowNav] = useState(true);
 
     const logout = () => {
         cookies.remove("token");
@@ -50,9 +51,9 @@ function Home() {
     if (isAuth) {
         return (
             <div className="bg-text w-screen h-screen grid grid-rows-6">
-                <Nav isAuth={isAuth} logout={logout}></Nav>
-                <Chat client={client}>
-                    <ChooseGame />
+                <Nav isAuth={isAuth} logout={logout} showNav={showNav}></Nav>
+                <Chat client={client} >
+                    <ChooseGame setShowNav={setShowNav} />
                 </Chat>
             </div>
         )

@@ -3,6 +3,7 @@ import { useReducer, useState } from 'react'
 import { newBoard } from './utility_funcs';
 import { tttReducer } from './reducers';
 import Board from './Board';
+import IMAGES from '../images/images'
 import { useChatContext, Window, MessageList, MessageInput } from 'stream-chat-react';
 
 function TicTacToeGame({ channel, setChannel, game }) {
@@ -61,35 +62,97 @@ function TicTacToeGame({ channel, setChannel, game }) {
         }
     })
 
+
+    let exitButtonDisplay = 'grid'
+    if (status !== 'finish') {
+        exitButtonDisplay = 'hidden'
+    }
+
     if (!playersJoined) {
         return (
-            <>
-                <div>Waiting for other player to join...</div>
-                <button onClick={async () => {
-                    await channel.stopWatching();
-                    setChannel(null);
-                }}>Exit</button>            </>
+            <div className='grid grid-rows-4 w-screen h-[82.5vh]'>
+                <div className='place-self-center justify-self-center row-span-2 text-4xl text-yellow-500 font-bold'>
+                    Waiting for the other player to join...
+                </div>
+                <button
+                    className='hover:bg-lavender active:bg-black grid'
+                    onClick={
+                        async () => {
+                            await channel.stopWatching();
+                            setChannel(null);
+                        }
+                    }
+                >
+                    <img
+                        src={IMAGES.backIcon}
+                        alt="Leaderboard"
+                        className='max-w-iconSize grid justify-self-center place-self-center' />
+                </button>
+            </div>
         );
     }
 
     return (
-        <div className="gameContainer">
-            <div>{NEXT_PLAYER_TEXT[status](player)}{GAME_STATUS_TEXT[status](player)}</div>
-            <Board board={board} handleClick={handleClick} game={game} />
-            <button
-                onClick={() => { reset() }
-                }>
-                Reset
-            </button>
-            <Window>
-                <MessageList disableDateSeparator />
-                <MessageInput noFiles />
-            </Window>
-            <button onClick={async () => {
-                await channel.stopWatching();
-                setChannel(null);
-            }}>Exit</button>
-        </div>
+        <div className="grid grid-rows-4 w-screen h-[82.5vh]">
+            <div className='row-start-1 grid grid-cols-3 w-screen h-full'>
+                <div className='grid grid-cols-2 w-fit'>
+                    <text className={`${exitButtonDisplay} place-self-center justify-self-center ml-6 text-3xl text-yellow-500`}>Back</text>
+                    <button
+                        className={`hover:bg-lavender hover:rounded-md  active:bg-black ${exitButtonDisplay} justify-self-start self-center`}
+                        onClick={
+                            async () => {
+                                await channel.stopWatching();
+                                setChannel(null);
+                            }
+                        }
+                    >
+                        <img
+                            src={IMAGES.backIcon}
+                            alt="Leaderboard"
+                            className='max-w-iconSize grid justify-self-center place-self-center' />
+                    </button>
+                </div>
+                <div className='col-start-2 place-self-center text-3xl text-yellow-500'>
+                    {NEXT_PLAYER_TEXT[status](player)}{GAME_STATUS_TEXT[status](player)}
+                </div>
+            </div>
+            <div className='row-start-2 grid grid-cols-3 w-screen h-full'>
+                <div className='col-start-2 place-self-center'>
+                    <Board board={board} handleClick={handleClick} game={game} />
+                    <div className='grid grid-cols-2'>
+                        <text className='place-self-center justify-self-center mt-7 ml-6 text-3xl text-yellow-500'>Reset</text>
+                        <button
+                            className='hover:bg-black hover:rounded-md active:bg-black grid w-full h-full mt-5'
+                            onClick={() => { reset() }}
+                        >
+                            <img
+                                src={IMAGES.resetIcon}
+                                alt="Leaderboard"
+                                className='max-w-iconSize grid justify-self-center place-self-center' />
+                        </button>
+                    </div>
+
+                </div>
+                {/* <div>
+                    <Window>
+                        <MessageList disableDateSeparator />
+                        <MessageInput noFiles />
+                    </Window>
+                </div> */}
+            </div>
+            {/* <div className='overflow-hidden row-start-4 place-self-center grid grid-cols-4 w-screen h-full'>
+
+                <button
+                    onClick={
+                        async () => {
+                            await channel.stopWatching();
+                            setChannel(null);
+                        }
+                    }
+                    className={`${exitButtonDisplay}`}
+                >Exit</button>
+            </div> */}
+        </div >
     );
 }
 
