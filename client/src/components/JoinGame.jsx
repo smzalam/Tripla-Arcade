@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useChatContext } from "stream-chat-react";
 import Game from "./Game";
 import ChooseGame from "./ChooseGame";
+import IMAGES from '../images/images'
 
 function JoinGame({ game }) {
 
@@ -34,12 +35,38 @@ function JoinGame({ game }) {
             {channel ? (
                 <Game channel={channel} setChannel={setChannel} game={game}></Game>
             ) : (
-                <div className='joinGame'>
-                    <h4>Create Game</h4>
-                    <input placeholder='Username of rival...' onChange={(event) => { setRivalUserName(event.target.value) }} />
-                    <button onClick={createChannel}>Join Game</button>
-                    <button onClick={() => setExit(true)}>Exit</button>
-                </div >
+                <div className="row-span-3 grid grid-cols-6 h-full w-full">
+                    <div className='col-start-2 col-span-4 grid grid-rows-4'>
+                        <h4 className="row-span-2 justify-self-center place-self-center text-2xl text-yellow-500 font-bold">
+                            Enter the username of the person you want to play the game with!
+                        </h4>
+                        <div className="justify-self-center place-self-center row-start-2 grid grid-cols-3 w-full h-2/4">
+                            <input
+                                placeholder='Username of rival...'
+                                onChange={
+                                    (event) => {
+                                        setRivalUserName(event.target.value)
+                                    }
+                                }
+                                className="col-span-2 bg-white rounded-md w-full h-full p-3 place-self-center" />
+                            <button
+                                onClick={createChannel}
+                                className="bg-yellow-500 hover:bg-lavender active:bg-black active:text-white p-7 rounded-md w-full h-full ml-2">
+                                Join Game
+                            </button>
+                        </div>
+
+                        <button
+                            className='hover:bg-lavender active:bg-black grid'
+                            onClick={() => setExit(true)}
+                        >
+                            <img
+                                src={IMAGES.backIcon}
+                                alt="Leaderboard"
+                                className='max-w-iconSize grid justify-self-center place-self-center' />
+                        </button>
+                    </div >
+                </div>
             )}
         </>
     );

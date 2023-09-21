@@ -26,8 +26,6 @@ function ChooseGame() {
 
                                 <div className="flex-1 px-6 py-4">
                                     <div className="font-bold text-xl mb-2">Tic Tac Toe</div>
-                                    {/* <p className="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia,
-                                    nulla!</p> */}
                                 </div>
                             </button>
                         </div>
@@ -41,8 +39,6 @@ function ChooseGame() {
 
                                 <div className="flex-1 px-6 py-4">
                                     <div className="font-bold text-xl mb-2">Ultimate Tic Tac Toe</div>
-                                    {/* <p className="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia,
-                                    nulla!</p> */}
                                 </div>
                             </button>
                         </div>
@@ -56,8 +52,6 @@ function ChooseGame() {
 
                                 <div className="flex-1 px-6 py-4">
                                     <div className="font-bold text-xl mb-2">Connect 4</div>
-                                    {/* <p className="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia,
-                                    nulla!</p> */}
                                 </div>
                             </button>
                         </div>
