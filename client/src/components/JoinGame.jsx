@@ -38,7 +38,7 @@ function JoinGame({ game, setShowNav }) {
             ) : (
                 <div className="row-span-3 grid grid-cols-6 h-full w-full">
                     <div className='col-start-2 col-span-4 grid grid-rows-4'>
-                        <h4 className="row-span-2 justify-self-center place-self-center text-2xl text-yellow-500 font-bold">
+                        <h4 className="row-span-2 justify-self-center place-self-center text-2xl text-smoky font-bold">
                             Enter the username of the person you want to play the game with!
                         </h4>
                         <div className="justify-self-center place-self-center row-start-2 grid grid-cols-3 w-full h-2/4">
@@ -58,7 +58,7 @@ function JoinGame({ game, setShowNav }) {
                         </div>
 
                         <button
-                            className='hover:bg-lavender active:bg-black grid'
+                            className='hover:bg-lavender active:bg-black w-1/4 rounded-md grid place-self-center'
                             onClick={() => setExit(true)}
                         >
                             <img

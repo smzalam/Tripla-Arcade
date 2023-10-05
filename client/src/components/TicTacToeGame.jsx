@@ -7,6 +7,8 @@ import IMAGES from '../images/images'
 import { useChatContext, Window, MessageList, MessageInput } from 'stream-chat-react';
 
 function TicTacToeGame({ channel, setChannel, game }) {
+    // const enable = true;
+    // const disable = false;
     const client = useChatContext()
     const players = Object.keys(channel.state.members)
     const NEXT_PLAYER = {
@@ -25,12 +27,15 @@ function TicTacToeGame({ channel, setChannel, game }) {
         board: newBoard(3, 3, () => ""),
         player: players[0],
         turn: 'X',
-        status: 'start'
+        status: 'start',
+        // addLog: 'true'
     }
+
+    const game_log = [];
 
     const [playersJoined, setPlayersJoined] = useState(channel.state.watcher_count === 2);
     const [state, dispatch] = useReducer(tttReducer, initialState);
-    const { board, player, turn, status } = state
+    const { board, player, turn, status, addLog } = state
 
     const handleClick = async (x, y) => {
         await channel.sendEvent({
@@ -40,14 +45,18 @@ function TicTacToeGame({ channel, setChannel, game }) {
             }
         })
     }
+    // const add_to_log = async (player, x, y) => {
+    // }
     const reset = async () => {
         await channel.sendEvent({
             type: 'reset'
         })
     }
 
+
     channel.on((event) => {
         if (event.type == "game-move") {
+            console.log(addLog)
             const { x, y } = event.data
             dispatch({ type: 'CLICK', payload: { x, y }, currentPlayer: event.user.id, changeTurn: 'true', players: NEXT_PLAYER, default: initialState })
             if (event.user.id !== client.client.userID) {
@@ -55,12 +64,18 @@ function TicTacToeGame({ channel, setChannel, game }) {
                 console.log('client: ', client.client.userID)
                 dispatch({ type: 'CLICK', payload: { x, y }, changeTurn: 'false', default: initialState })
             }
+            // console.log('ttt', addLog)
+            // if (addLog === 'true') {
+            //     game_log.push([player, x, y])
+            // }
         } else if (event.type == "reset") {
             dispatch({ type: 'RESET', state: initialState })
         } else if (event.type == "user.watching.start" || event.type == "user.watching.stop") {
             setPlayersJoined(channel.state.watcher_count === 2);
         }
     })
+
+    console.log(game_log)
 
 
     let exitButtonDisplay = 'grid'
@@ -71,11 +86,11 @@ function TicTacToeGame({ channel, setChannel, game }) {
     if (!playersJoined) {
         return (
             <div className='grid grid-rows-4 w-screen h-[82.5vh]'>
-                <div className='place-self-center justify-self-center row-span-2 text-4xl text-yellow-500 font-bold'>
+                <div className='pt-24 place-self-center justify-self-center row-span-2 text-4xl text-smoky font-bold'>
                     Waiting for the other player to join...
                 </div>
                 <button
-                    className='hover:bg-lavender active:bg-black grid'
+                    className='hover:bg-lavender active:bg-black grid w-1/4 rounded-md place-self-center'
                     onClick={
                         async () => {
                             await channel.stopWatching();
@@ -93,7 +108,7 @@ function TicTacToeGame({ channel, setChannel, game }) {
     }
 
     return (
-        <div className="grid grid-rows-4 w-screen h-[82.5vh]">
+        <div className="grid grid-rows-5 w-screen h-[82.5vh]">
             <div className='row-start-1 grid grid-cols-3 w-screen h-full'>
                 <div className='grid grid-cols-2 w-fit'>
                     <text className={`${exitButtonDisplay} place-self-center justify-self-center ml-6 text-3xl text-yellow-500`}>Back</text>
@@ -112,7 +127,7 @@ function TicTacToeGame({ channel, setChannel, game }) {
                             className='max-w-iconSize grid justify-self-center place-self-center' />
                     </button>
                 </div>
-                <div className='col-start-2 place-self-center text-3xl text-yellow-500'>
+                <div className='col-start-2 place-self-center text-3xl text-yellow-500 font-bold'>
                     {NEXT_PLAYER_TEXT[status](player)}{GAME_STATUS_TEXT[status](player)}
                 </div>
             </div>
@@ -133,10 +148,18 @@ function TicTacToeGame({ channel, setChannel, game }) {
                     </div>
 
                 </div>
+                <div className='col-start-3 place-self-center w-4/5 h-full'>
+                    {game_log}
+                </div>
                 {/* <div>
                     <Window>
-                        <MessageList disableDateSeparator />
-                        <MessageInput noFiles />
+                        <MessageList
+                            disableDateSeparator
+                            closeReactionSelectorOnClick
+                            hideDeletedMessages
+                            messageActions={["react"]}
+                        />
+                        <MessageInput noFiles={enable} />
                     </Window>
                 </div> */}
             </div>

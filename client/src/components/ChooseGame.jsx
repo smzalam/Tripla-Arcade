@@ -15,7 +15,7 @@ function ChooseGame({ setShowNav }) {
                 </>
             ) : (
                 <div className='grid grid-rows-5 row-span-5 w-screen h-full'>
-                    <text className='text-5xl row-start-1 justify-self-center place-self-center'>Choose a game!</text>
+                    <text className='text-5xl text-smoky pt-6 font-bold row-start-1 justify-self-center place-self-center'>Choose a game!</text>
                     <div className='row-start-3 row-span-2 grid grid-cols-3'>
                         <div className="h-fit max-w-sm flex flex-col rounded-lg overflow-hidden bg-white hover:bg-lavender shadow place-self-center justify-self-center">
                             <button

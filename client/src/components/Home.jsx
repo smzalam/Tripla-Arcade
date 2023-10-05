@@ -11,11 +11,11 @@ import Cookies from "universal-cookie";
 // eslint-disable-next-line react/prop-types
 function Home() {
 
-    const [showForm, setShowForm] = useState(null);
     const apiKey = import.meta.env.VITE_apiKey;
     const cookies = new Cookies();
     const token = cookies.get("token");
     const client = StreamChat.getInstance(apiKey);
+    const [showForm, setShowForm] = useState(null);
     const [isAuth, setIsAuth] = useState(false);
     const [showNav, setShowNav] = useState(true);
 
@@ -47,17 +47,22 @@ function Home() {
             console.log(error);
         }
     }
-
     if (isAuth) {
         return (
             <div className="bg-text w-screen h-screen grid grid-rows-6">
-                <Nav isAuth={isAuth} logout={logout} showNav={showNav}></Nav>
+                <Nav
+                    isAuth={isAuth}
+                    logout={logout}
+                    showNav={showNav}>
+                </Nav>
                 <Chat client={client} >
                     <ChooseGame setShowNav={setShowNav} />
                 </Chat>
             </div>
         )
     }
+
+
 
     return (
         <div className="bg-text w-screen h-screen grid grid-rows-6">

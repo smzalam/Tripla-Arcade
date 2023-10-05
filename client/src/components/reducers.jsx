@@ -12,11 +12,12 @@ function tttReducer(state, action) {
             const nextState = clone(state);
             const { board, player, turn } = nextState;
             if (player !== action.currentPlayer || board[y][x]) {
+                // nextState.addLog = 'false'
                 return state;
             }
             board[y][x] = turn;
             const flatGrid = flatten(board)
-            console.log(flatGrid)
+            // console.log(flatGrid)
             if (checkForWinttt(flatGrid)) {
                 nextState.status = "finish";
                 return nextState;
@@ -27,7 +28,9 @@ function tttReducer(state, action) {
             if (action.changeTurn == 'true') {
                 nextState.player = action.players[turn];
                 nextState.turn = turn === 'X' ? 'O' : 'X'
+                // nextState.addLog = 'true'
             }
+            // console.log(addLog)
             return nextState;
         }
 
