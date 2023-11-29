@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useChatContext } from "stream-chat-react";
-import Game from "./Game";
+import Game from "../Navigations/GameNavigation";
 import ChooseGame from "./ChooseGame";
-import IMAGES from '../images/images'
+import IMAGES from '../../assets/images/images'
 
-function JoinGame({ game, setShowNav }) {
+function JoinGame({ game }) {
 
-    setShowNav(true);
     const [rivalUserName, setRivalUserName] = useState("");
     const [channel, setChannel] = useState(null);
     const [exit, setExit] = useState(false)
@@ -28,13 +27,13 @@ function JoinGame({ game, setShowNav }) {
 
     if (exit) {
         return (
-            <ChooseGame setShowNav={setShowNav}></ChooseGame>
+            <ChooseGame></ChooseGame>
         )
     }
     return (
         <>
             {channel ? (
-                <Game channel={channel} setChannel={setChannel} game={game} setShowNav={setShowNav}></Game>
+                <Game channel={channel} setChannel={setChannel} game={game}></Game>
             ) : (
                 <div className="row-span-3 grid grid-cols-6 h-full w-full">
                     <div className='col-start-2 col-span-4 grid grid-rows-4'>

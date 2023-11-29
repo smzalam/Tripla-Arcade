@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useReducer, useState } from 'react'
-import { newBoard } from './utility_funcs';
-import { c4Reducer } from './reducers';
-import Board from './Board';
+import { newBoard } from '../../components/utility_funcs';
+import { c4Reducer } from '../../components/reducers';
+import Board from '../../components/Board';
 import { useChatContext, Window, MessageList, MessageInput } from 'stream-chat-react';
 
 function Connect4Game({ channel, setChannel, game }) {

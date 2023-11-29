@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useReducer, useState } from 'react'
-import { newBoard } from './utility_funcs';
-import { tttReducer } from './reducers';
-import Board from './Board';
-import IMAGES from '../images/images'
-import { useChatContext, Window, MessageList, MessageInput } from 'stream-chat-react';
+import { newBoard } from '../../components/utility_funcs';
+import { tttReducer } from '../../components/reducers';
+import Board from '../../components/Board';
+import IMAGES from '../../assets/images/images'
+import { useChatContext } from 'stream-chat-react';
 
 function TicTacToeGame({ channel, setChannel, game }) {
     // const enable = true;

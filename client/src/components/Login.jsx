@@ -1,6 +1,6 @@
+import Axios from "axios";
 import { useState } from "react";
 import Cookies from "universal-cookie";
-import Axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 function Login({ setIsAuth }) {
