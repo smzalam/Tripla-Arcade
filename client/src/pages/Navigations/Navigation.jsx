@@ -4,9 +4,12 @@ import { client } from "../../lib/steam/config";
 import Dashboard from "../Dashboard";
 import Home from "../Home";
 import Profile from '../Profile';
+import { useUserContext } from "../../context/AuthContext";
 
 // eslint-disable-next-line react/prop-types
-function Navigation({ isActive, isAuth }) {
+function Navigation({ isActive }) {
+
+    const { isAuth } = useUserContext();
 
     return (
         <>

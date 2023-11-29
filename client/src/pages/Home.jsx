@@ -1,34 +1,30 @@
-import { useState } from 'react';
-import LogInButton from '../components/LogInButton';
-import ShowForm from '../components/ShowForm';
-import SignUpButton from '../components/SignUpButton';
-import { useUserContext } from "../context/AuthContext";
+import { useState } from "react";
+import AuthModal from "../components/AuthModal";
 
 const Home = () => {
-  const { setIsAuth } = useUserContext();
-
-  const [showForm, setShowForm] = useState(false);
+  const [modal, setModal] = useState(false);
 
   return (
-    <div className="grid grid-cols-2 row-start-2 row-span-6">
-            <div className="h-max text-white text-9xl p-3 px-10">
-              Competitive fun at its simplest.
-            </div>
-            {showForm ? (
-              <>
-                <ShowForm
-                  showForm={showForm}
-                  setIsAuth={setIsAuth}
-                  setShowForm={setShowForm}>
-                </ShowForm>
-              </>
-            ) : (
-              <div className="grid grid-rows-2 justify-center align-center">
-                <LogInButton setShowForm={ setShowForm } />
-                <SignUpButton setShowForm={ setShowForm} />
-              </div>
-            )}
-          </div>
+    <div className="grid grid-rows-3 row-start-2 row-span-6">
+      <div className="grid place-items-center h-max text-center row-span-2 text-white text-7xl p-3 px-10">
+        <text>Competitive fun at its simplest.</text>
+      </div>
+      <div className="grid grid-cols-2 h-max text-white p-3 px-10">
+        <div className="grid justify-center align-middle">
+          <button
+            onClick={() => { setModal(true) }}
+          >
+            Sign In
+          </button>
+          <AuthModal modal={modal} setModal={setModal} />
+        </div>
+        <div className='grid justify-center align-middle'>
+          <button>
+            Check out our games collection!
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
 

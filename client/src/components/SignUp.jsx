@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Axios from "axios";
-import Cookies from "universal-cookie";
+import { useUserContext } from "../context/AuthContext";
 
 // eslint-disable-next-line react/prop-types
-function SignUp({ setIsAuth }) {
-    const cookies = new Cookies();
+function SignUp({ setModal }) {
     const [user, setUser] = useState(null)
+    const { cookies, login } = useUserContext();
 
-    const signUp = () => {
+
+    const onSubmit = () => {
         try {
             Axios.post("http://localhost:3001/signup", user).then(res => {
                 const { token, userID, firstName, lastName, userName, hashedPassword } = res.data;
@@ -17,12 +18,16 @@ function SignUp({ setIsAuth }) {
                 cookies.set("lastName", lastName);
                 cookies.set("username", userName);
                 cookies.set("hashedPassword", hashedPassword);
-                setIsAuth(true);
             })
         } catch (error) {
             console.log(error)
         }
     }
+
+    useEffect(() => {
+        login()
+    }, [onSubmit])
+
     return (
         <div className='row-start-2 align-self-center border-0 grid grid-cols-3'>
             {/* <label htmlFor="">Sign Up</label> */}
@@ -63,7 +68,12 @@ function SignUp({ setIsAuth }) {
                     className="bg-white rounded-full my-2 p-3" />
             </div>
             <button
-                onClick={signUp}
+                onClick={
+                    () => {
+                        onSubmit();
+                        setModal(false);
+                    }
+                }
                 className="bg-yellow-500 hover:bg-lavender p-7 rounded-md w-max h-full ml-2">
                 Sign Up
             </button>

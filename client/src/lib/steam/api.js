@@ -3,8 +3,8 @@ import { client } from "./config";
 export async function connectCurrentUser(user, token) {
     
     try {
-        await client.connectUser(user, token)
-
+        await client.connectUser(user, token)   
+        return true;
     } catch(error) {
         console.log(error)
         return error

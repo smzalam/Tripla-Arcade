@@ -2,12 +2,12 @@
 import SignUp from './SignUp'
 import Login from './Login'
 
-function ShowForm({ showForm, setIsAuth, setShowForm }) {
+function ShowForm({ setModal, showForm, setShowForm }) {
     if (showForm === 'login') {
         return (
             <div className='grid grid-rows-3'>
                 <div className='row-start-2 row-span-2'>
-                    <Login setIsAuth={setIsAuth}></Login>
+                    <Login setModal={setModal}></Login>
                     <button
                         onClick={() => {
                             setShowForm('signup')
@@ -24,7 +24,7 @@ function ShowForm({ showForm, setIsAuth, setShowForm }) {
         return (
             <div className='grid grid-rows-3'>
                 <div className='row-start-2 row-span-2'>
-                    <SignUp setIsAuth={setIsAuth}></SignUp>
+                    <SignUp setModal={setModal}></SignUp>
                     <button
                         onClick={() => {
                             setShowForm('login');
@@ -38,4 +38,4 @@ function ShowForm({ showForm, setIsAuth, setShowForm }) {
     }
 }
 
-export default ShowForm
+export default ShowForm;
