@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext,  useState } from "react";
+import { createContext, useContext, useState } from "react";
 import Cookies from "universal-cookie";
 import { connectCurrentUser, disconnectCurrentUser } from "../lib/steam/api";
 
@@ -9,10 +9,10 @@ const AuthProvider = ({ children }) => {
     const [isAuth, setIsAuth] = useState(false);
 
     const cookies = new Cookies();
-    const token = cookies.get("token");
 
     const login = () => {
         try {
+            const token = cookies.get("token");
             const user = {
                 id: cookies.get("userID"),
                 name: cookies.get("username"),
@@ -20,8 +20,10 @@ const AuthProvider = ({ children }) => {
                 lastName: cookies.get('lastName'),
                 hashedPassword: cookies.get("hashedPassword")
             }
-            connectCurrentUser(user, token).then(() => {
-                setIsAuth(true);
+            connectCurrentUser(user, token).then((result) => {
+                if (result) {
+                    setIsAuth(true);
+                }
             });
         } catch (error) {
             console.log(error);

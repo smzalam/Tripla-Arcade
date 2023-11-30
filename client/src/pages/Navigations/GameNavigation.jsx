@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 // import React from 'react'
 
-import Connect4Game from "../Games/Connect4Game"
-import MiniKahootGame from "../Games/MiniKahootGame"
-import TicTacToeGame from "../Games/TicTacToeGame"
 import { Channel } from "stream-chat-react";
+import Connect4Game from "../Games/Connect4Game";
+import MiniKahootGame from "../Games/MiniKahootGame";
+import TicTacToeGame from "../Games/TicTacToeGame";
 
 function GameNavigation({ channel, setChannel, game }) {
 

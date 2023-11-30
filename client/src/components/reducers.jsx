@@ -1,4 +1,4 @@
-import { checkForDrawttt, checkForDrawc4, checkForWinttt, checkForWinc4, clone, flatten } from "./utility_funcs"
+import { checkForDrawttt, checkForDrawc4, checkForWinttt, checkForWinc4, clone, flatten } from "../utils/utility_funcs"
 
 function tttReducer(state, action) {
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Axios from "axios";
 import { useUserContext } from "../context/AuthContext";
 
@@ -18,15 +18,11 @@ function SignUp({ setModal }) {
                 cookies.set("lastName", lastName);
                 cookies.set("username", userName);
                 cookies.set("hashedPassword", hashedPassword);
-            })
+            }).then(() => {login()})
         } catch (error) {
             console.log(error)
         }
     }
-
-    useEffect(() => {
-        login()
-    }, [onSubmit])
 
     return (
         <div className='row-start-2 align-self-center border-0 grid grid-cols-3'>

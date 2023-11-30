@@ -3,11 +3,15 @@ import { client } from "./config";
 export async function connectCurrentUser(user, token) {
     
     try {
-        await client.connectUser(user, token)   
-        return true;
+        const userConnection = await client.connectUser(user, token)   
+        console.log(userConnection)
+        if (userConnection) {
+            return true
+        }
+        return false
     } catch(error) {
         console.log(error)
-        return error
+        return false
     }
 }
 
@@ -16,6 +20,6 @@ export async function disconnectCurrentUser() {
         client.disconnectUser();
     } catch(error) {
         console.log(error);
-        return error
+        return false
     }
 }

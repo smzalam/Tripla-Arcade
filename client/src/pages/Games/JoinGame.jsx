@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useChatContext } from "stream-chat-react";
+import IMAGES from '../../assets/images/images';
 import Game from "../Navigations/GameNavigation";
 import ChooseGame from "./ChooseGame";
-import IMAGES from '../../assets/images/images'
 
 function JoinGame({ game }) {
 
