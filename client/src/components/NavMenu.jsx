@@ -4,7 +4,7 @@ import IMAGES from '../assets/images/images';
 import { useUserContext } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 import { NavItems } from './Navigation/NavItems';
-import NavButtons from './Navigation/NavButtons';
+import NavButtons from './Buttons/NavButtons';
 
 function NavMenu({ setIsActive }) {
     const { cookies, logout, isAuth } = useUserContext();

@@ -1,49 +1,4 @@
-import { checkForDrawttt, checkForDrawc4, checkForWinttt, checkForWinc4, clone, flatten } from "../utils/utility_funcs";
-
-function tttReducer(state, action) {
-
-    if (state.status === 'finish' && action.type !== 'RESET') {
-        return state;
-    }
-
-    switch (action.type) {
-        case 'CLICK': {
-            const { x, y } = action.payload;
-            const nextState = clone(state);
-            const { board, player, turn, next_player } = nextState;
-
-            if (player !== action.currentPlayer || board[y][x]) {
-                return state;
-            }
-
-            board[y][x] = turn;
-
-            const flatGrid = flatten(board)
-            if (checkForWinttt(flatGrid)) {
-                nextState.status = "finish";
-                return nextState;
-            }
-            if (checkForDrawttt(flatGrid)) {
-                return action.default
-            }
-
-            if (action.changeTurn === 'true') {
-                nextState.player = next_player[turn];
-                nextState.turn = turn === 'X' ? 'O' : 'X'
-            }
-            
-            return nextState;
-        }
-
-        case 'RESET': {
-            return action.state;
-        }
-
-        default:
-            return state;
-    }
-}
-
+import { checkForDrawc4, checkForWinc4, clone } from "../utils/utility_funcs";
 
 function c4Reducer(state, action) {
     if (state.status === 'finish' && action.type !== 'RESET') {
@@ -92,4 +47,4 @@ function c4Reducer(state, action) {
     }
 }
 
-export { tttReducer, c4Reducer }
+export default c4Reducer

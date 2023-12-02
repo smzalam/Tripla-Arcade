@@ -1,6 +1,6 @@
-import { newBoard } from "../components/utility_funcs"
+import { newBoard } from "../utils/utility_funcs"
 
-export const getInitialGameState = (rows, cols, mapper, players, channel) => {
+export const getInitialGameState = (rows, cols, mapper, players) => {
     return {
         board: newBoard(rows, cols, mapper),
         player: players[0],
@@ -10,13 +10,15 @@ export const getInitialGameState = (rows, cols, mapper, players, channel) => {
             'X': players[1],
             'O': players[0]
         },
-        next_player_text: {
-            'start': player => `It is player ${channel.state.members[player].user.name}'s turn.`,
-            'finish': () => null
-        },
-        game_status_text: {
-            'start': () => null,
-            'finish': player => `Player ${channel.state.members[player].user.name} has won!`
-        },
     }
+}
+
+export const NEXT_PLAYER_TEXT = {
+    'start': player_name => `It is player ${player_name}'s turn.`,
+    'finish': () => null
+}
+
+export const GAME_STATUS_TEXT = {
+    'start': () => null,
+    'finish': player_name => `Player ${player_name} has won!`
 }

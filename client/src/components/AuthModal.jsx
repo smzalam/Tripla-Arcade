@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Modal from "./Modal"
 import ShowForm from "./ShowForm";
-import LogInButton from "./LogInButton";
-import SignUpButton from "./SignUpButton";
+import LogInButton from "./Buttons/LogInButton";
+import SignUpButton from "./Buttons/SignUpButton";
 
 const AuthModal = ({ modal, setModal }) => {
 
