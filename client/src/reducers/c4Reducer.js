@@ -7,21 +7,21 @@ function c4Reducer(state, action) {
 
     switch (action.type) {
         case 'CLICK': {
-            const { emptyCellPlace, x } = action.payload;
-            console.log(emptyCellPlace, ':', x)
+            const { x } = action.payload;
             const nextState = clone(state);
-            const { board, player, turn } = nextState;
-            console.log('board: ', board)
+            const { board, player, turn, next_player } = nextState;
+
             if (player !== action.currentPlayer) {
                 return state;
             }
+
             for (var i = 5; i >= 0; i--) {
                 if (board[i][x] === '') {
                     board[i][x] = turn
                     break;
                 }
             }
-            console.log(checkForDrawc4(board))
+
             if (checkForWinc4(board) === 1) {
                 nextState.status = "finish";
                 return nextState;
@@ -29,16 +29,16 @@ function c4Reducer(state, action) {
             if (checkForDrawc4(board) === 1) {
                 return action.default
             }
+
             if (action.changeTurn == 'true') {
-                nextState.player = action.players[turn];
+                nextState.player = next_player[turn];
                 nextState.turn = turn === 'X' ? 'O' : 'X';
             }
+
             return nextState;
         }
 
         case 'RESET': {
-            const board = action.state.board
-            console.log(board)
             return action.state;
         }
 

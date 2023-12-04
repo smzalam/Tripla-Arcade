@@ -2,10 +2,10 @@
 import { useReducer, useState } from 'react';
 import { useChatContext } from 'stream-chat-react';
 import Board from '../../components/Board';
-import { c4Reducer } from '../../components/reducers';
+import c4Reducer from '../../reducers/c4Reducer'
 import { newBoard } from '../../utils/utility_funcs';
 
-function Connect4Game({ channel, setChannel, game }) {
+function Connect4TestGame({ channel, setChannel, game }) {
     const client = useChatContext()
     const players = Object.keys(channel.state.members)
     const NEXT_PLAYER = {
@@ -101,4 +101,4 @@ function Connect4Game({ channel, setChannel, game }) {
     );
 }
 
-export default Connect4Game
+export default Connect4TestGame

@@ -16,9 +16,10 @@ function Modal({ openModal, closeModal, children }) {
     <dialog
       ref={ref}
       onCancel={closeModal}
+      className="h-max w-max rounded-lg bg-gray-800"
     >
       {children}
-      <button onClick={closeModal}>
+      <button onClick={closeModal} className="w-full p-10 text-blue-500">
         Close
       </button>
     </dialog>

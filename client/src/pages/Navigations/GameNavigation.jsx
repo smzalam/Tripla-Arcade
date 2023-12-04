@@ -5,7 +5,7 @@ import { Channel } from "stream-chat-react";
 import Connect4Game from "../Games/Connect4Game";
 import MiniKahootGame from "../Games/MiniKahootGame";
 import TicTacToeGame from "../Games/TicTacToeGame";
-import TicTacToeTestGame from "../Games/test";
+import Connect4TestGame from "../Games/test";
 
 function GameNavigation({ channel, setChannel, game }) {
 
@@ -14,13 +14,13 @@ function GameNavigation({ channel, setChannel, game }) {
             {game === 'TicTacToe' &&
                 <div className="row-span-5 grid grid-row-1">
                     <Channel channel={channel} className="w-full h-full">
-                        <TicTacToeTestGame channel={channel} setChannel={setChannel} game={game}></TicTacToeTestGame>
+                        <TicTacToeGame channel={channel} setChannel={setChannel} game={game}></TicTacToeGame>
                     </Channel>
                 </div>
             }
             {game === 'Connect4' && 
                 <Channel channel={channel}>
-                    <Connect4Game channel={channel} setChannel={setChannel} game={game}></Connect4Game>
+                    <Connect4TestGame channel={channel} setChannel={setChannel} game={game}></Connect4TestGame>
                 </Channel>
             }
             {game === 'MiniKahoot' && 

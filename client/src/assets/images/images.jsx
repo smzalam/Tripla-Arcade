@@ -8,6 +8,7 @@ const IMAGES = {
     connect4: new URL('./connect4.jpg', import.meta.url).href,
     ttt: new URL('./ttt.jpg', import.meta.url).href,
     ultttt: new URL('./ultttt.png', import.meta.url).href,
+    settings: new URL('./settings.png', import.meta.url).href,
 }
 
 export default IMAGES;

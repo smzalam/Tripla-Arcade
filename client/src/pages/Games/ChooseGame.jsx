@@ -45,7 +45,7 @@ function ChooseGame() {
                                 onClick={
                                     () => {
                                         if (isAuth) {
-                                            setGame('Connect4');
+                                            setGame('MiniKahoot');
                                         } else {
                                             setModal(true);
                                         }
@@ -66,7 +66,7 @@ function ChooseGame() {
                                 onClick={
                                     () => {
                                         if (isAuth) {
-                                            setGame('MiniKahoot');
+                                            setGame('Connect4');
                                         } else {
                                             setModal(true);
                                         }
