@@ -1,26 +1,26 @@
-import { Chat } from "stream-chat-react";
-import ChooseGame from '../Games/ChooseGame';
-import { client } from "../../lib/steam/config";
-import Dashboard from "../Dashboard";
-import Home from "../Home";
-import Profile from '../Profile';
-import { useUserContext } from "../../context/AuthContext";
-
 // eslint-disable-next-line react/prop-types
+import Guide from '../Guide'
+import ChooseGame from '../Games/ChooseGame'
+import Profile from '../Profile'
+import classNames from 'classnames'
+
 function Navigation({ isActive }) {
 
-    const { isAuth } = useUserContext();
 
     return (
-        <>
-            {isActive === "/" && !isAuth && <Home />}
-            {isActive === "/" && isAuth && <Dashboard />}
-            {isActive === "/choose_games" && 
-                <Chat client={client} >
-                    <ChooseGame isAuth={isAuth}/>
-                </Chat>}
+        <div
+            className=
+            {   
+                classNames(
+                    { 'hidden': isActive === '/' },
+                    { 'grid': isActive !== '/' }
+                )
+            }
+        >
+            {isActive === "/guide" && <Guide />}
+            {isActive === "/choose_games" && <ChooseGame />}
             {isActive == "/profile" && <Profile />}
-        </>
+        </div>
     )
 }
 

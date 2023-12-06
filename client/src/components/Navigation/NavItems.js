@@ -8,10 +8,10 @@ export const NavItems = [
         imageAlt: 'Games'
     },
     {
-        name: 'Leaderboard',
-        url: '/leaderboard',
+        name: 'uide',
+        url: '/guide',
         imageSrc: IMAGES.leaderboardIcon,
-        imageAlt: 'Leaderboard'
+        imageAlt: 'Guide'
     },
     {
         name: 'Profile',

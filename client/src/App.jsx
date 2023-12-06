@@ -1,22 +1,13 @@
-import { useState } from "react";
-// import Navigation from "./pages/Navigations/Navigation";
-// import NavMenu from "./components/NavMenu";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import { useUserContext } from "./context/AuthContext";
 import SettingsProvider from "./context/SettingsContext";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  const { isAuth } = useUserContext();
-  const [isActive, setIsActive] = useState('/');
 
   return (
     <div className="w-screen h-screen">
-      <div className="h-screen w-screen grid auto-cols-auto grid-cols-1 grid-rows-[0.7fr_3.6fr_0.7fr] justify-center align-center justify-items-center align-items-center">
+      <div className="h-screen w-screen grid auto-cols-auto grid-cols-1 grid-rows-1 justify-center align-center justify-items-center align-items-center">
         <SettingsProvider>
-          <Header />
-          <div>No</div>
-          <Footer />
+          <Dashboard />
         </SettingsProvider>
       </div>
     </div>
