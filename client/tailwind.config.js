@@ -4,18 +4,36 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}"
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        transparent: 'transparent',
-        current: 'currentColor',
-        'smoky': '#E6E6FA',
-        'lavender': '#D8BFD8',
-        'headings': '#6B0EAD',
-        'text': '#8A2BE2',
+        'text': 'var(--text)',
+        'background': 'var(--background)',
+        'primary': 'var(--primary)',
+        'secondary': 'var(--secondary)',
+        'accent': 'var(--accent)',
+      },
+      fontSize: {
+        sm: '0.750rem',
+        base: '1rem',
+        xl: '1.333rem',
+        '2xl': '1.777rem',
+        '3xl': '2.369rem',
+        '4xl': '3.158rem',
+        '5xl': '4.210rem',
       },
       fontFamily: {
-        title: 'Ubuntu',
+        // heading: ['Englebert', 'cursive'],
+        // heading: ['Ubuntu Mono', 'monospace'],
+        heading: 'Ubuntu',
+        // body: ['Architects Daughter', 'cursive'],
+        body: ['Sono', 'monospace'],
+      },
+      fontWeight: {
+        light: '300',
+        normal: '400',
+        bold: '700',
       },
       maxWidth: {
         iconSize: '75%',

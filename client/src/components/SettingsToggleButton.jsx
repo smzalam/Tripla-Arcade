@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import { useState } from 'react'
 
-const SettingsToggleButton = ({ settingName, settingToggle, margin_top }) => {
+const SettingsToggleButton = ({ settingName, settingToggle, margin_top, margin_bottom }) => {
     const [isSelected, setIsSelected] = useState(false)
 
     return (
@@ -9,8 +9,9 @@ const SettingsToggleButton = ({ settingName, settingToggle, margin_top }) => {
             <div
                 className={
                     classnames(
-                        'text-white flex items-center justify-center',
-                        margin_top
+                        'flex items-center justify-center',
+                        margin_top,
+                        margin_bottom
                     )
                 }
             >
@@ -29,7 +30,8 @@ const SettingsToggleButton = ({ settingName, settingToggle, margin_top }) => {
                         {
                             'bg-green-500': isSelected
                         },
-                        margin_top
+                        margin_top,
+                        margin_bottom
                     )
                 }
             >

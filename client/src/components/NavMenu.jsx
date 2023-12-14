@@ -3,22 +3,23 @@ import IMAGES from '../assets/images/images';
 import { NavItems } from './Navigation/NavItems';
 import NavButtons from './Buttons/NavButtons';
 import SettingsButton from './SettingsButton';
+import { Cog8ToothIcon } from '@heroicons/react/24/outline'
 
 function NavMenu({ setIsActive }) {
 
     return (
-            <div className={`bg-headings flex flex-row flex-initial transition justify-center p-4`}>
+            <div className={`font-body bg-background flex flex-row flex-initial transition justify-center p-4`}>
                 {NavItems.map((item) => (
                     <div key={item.name} className=''>
                         <NavButtons
                             setIsActive={setIsActive}
                             url={item.url}
-                            imageSrc={item.imageSrc}
+                            Icon={item.Icon}
                             imageAlt={item.imageAlt}
                         />
                     </div>
                 ))}
-                <SettingsButton content={'Settings'} imageAlt={'Settings'} imageSrc={IMAGES.settings} />
+                <SettingsButton content={'Settings'} Icon={Cog8ToothIcon} imageAlt={'Settings'} imageSrc={IMAGES.settings} />
             </div>
     )
 }

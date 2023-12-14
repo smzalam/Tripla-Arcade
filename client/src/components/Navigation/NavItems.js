@@ -1,22 +1,22 @@
-import IMAGES from "../../assets/images/images"
+import { PuzzlePieceIcon, BookmarkSquareIcon, UserIcon } from '@heroicons/react/24/outline'
 
 export const NavItems = [
     {
         name: 'Games',
         url: '/choose_games',
-        imageSrc: IMAGES.gamesIcon,
+        Icon: PuzzlePieceIcon,
         imageAlt: 'Games'
     },
     {
         name: 'uide',
         url: '/guide',
-        imageSrc: IMAGES.leaderboardIcon,
+        Icon: BookmarkSquareIcon,
         imageAlt: 'Guide'
     },
     {
         name: 'Profile',
         url: '/profile',
-        imageSrc: IMAGES.profileIcon,
+        Icon: UserIcon,
         imageAlt: 'Profile'
     },
 ]

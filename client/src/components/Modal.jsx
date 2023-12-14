@@ -18,10 +18,13 @@ function Modal({ openModal, closeModal, children }) {
       onCancel={closeModal}
       className="h-max w-max rounded-lg bg-gray-800"
     >
-      {children}
-      <button onClick={closeModal} className="w-full p-10 text-blue-500">
-        Close
-      </button>
+      <div className="grid grid-cols-[1.9fr_0.1fr]">
+        {children}
+        <button onClick={closeModal} className="flex justify-end items-center w-full h-full hover:bg-gray-200 hover:opacity-50 p-10 text-blue-500">
+          X
+        </button>
+      </div>
+
     </dialog>
   );
 }

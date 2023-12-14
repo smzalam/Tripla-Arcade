@@ -2,9 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: Ubuntu;
-    src: url("fonts/Ubuntu-BoldItalic.ttf") format('truetype');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sono:wght@200;300;400;500;600;700;800&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap'); */
+
+
+@layer base {
+    :root {
+        --text: #1f1a00;
+        --background: #d8cce1;
+        --primary: #bb8fdb;
+        --secondary: #502470;
+        --accent: #f7bf18;
+    }
+
+    .dark {
+        --text: #fffae0;
+        --background: #2a1e33;
+        --primary: #502470;
+        --secondary: #bb8fdb;
+        --accent: #e7b008;
+    }
 }
 
 .str-chat__list {
