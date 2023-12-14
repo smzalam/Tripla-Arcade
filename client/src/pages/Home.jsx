@@ -2,9 +2,9 @@
 const Home = ({ setIsActive }) => {
 
   return (
-    <div className={`bg-headings grid h-full`}>
+    <div className={`bg-background grid h-full`}>
       <div
-        className="font-title text-lavender text-6xl col-start-1 col-end-4 justify-self-center place-self-center">
+        className="font-heading text-text text-7xl col-start-1 col-end-4 justify-self-center place-self-center">
         <button
           onClick={() => { setIsActive('/') }}
         >

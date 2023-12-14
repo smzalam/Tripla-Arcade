@@ -23,9 +23,6 @@ const Dashboard = () => {
         {
           classNames(
             "h-full grid grid-cols-[2fr_0.5fr]",
-            {
-             'border-yellow-500' : isActive === '/'
-            },
           )
         }
       >
