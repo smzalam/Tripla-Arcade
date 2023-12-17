@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import Home from "./Home"
 import Navigation from "./Navigations/Navigation"
-import NavMenu from "../components/NavMenu"
+import NavMenu from "../components/Navigation/NavMenu"
 import { useState } from "react"
 
 const Dashboard = () => {
@@ -11,10 +11,7 @@ const Dashboard = () => {
     <div
       className={
         classNames(
-          "w-full grid",
-          {
-            'grid-rows-[0.2fr_2fr]': isActive !== '/'
-          },
+          "bg-background w-full grid grid-cols-[0.2fr_2fr]",
         )
       }
     >
@@ -22,12 +19,17 @@ const Dashboard = () => {
         className=
         {
           classNames(
-            "h-full grid grid-cols-[2fr_0.5fr]",
+            {
+              'flex flex-row w-screen justify-evenly': isActive === '/'
+            },
+            {
+              'flex flex-col justify-evenly': isActive !== '/'
+            },
           )
         }
       >
-        <Home setIsActive={setIsActive} />
-        <NavMenu setIsActive={setIsActive} />
+        <Home isActive={isActive} setIsActive={setIsActive} />
+        <NavMenu isActive={isActive} setIsActive={setIsActive} />
       </div>
       <Navigation isActive={isActive} />
     </div>

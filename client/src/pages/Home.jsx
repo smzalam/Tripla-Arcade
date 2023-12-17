@@ -1,14 +1,15 @@
 
-const Home = ({ setIsActive }) => {
+const Home = ({ isActive, setIsActive }) => {
 
   return (
-    <div className={`bg-background grid h-full`}>
+    <div className={`bg-background grid`}>
       <div
         className="font-heading text-text text-7xl col-start-1 col-end-4 justify-self-center place-self-center">
         <button
+        className="pr-3 pl-1"
           onClick={() => { setIsActive('/') }}
         >
-          tripla arcade
+        {isActive === '/' ? 'tripla arcade' : 'tripla'}
         </button>
       </div>
       {/* // <div className="grid grid-rows-3 row-start-2 row-span-6">
