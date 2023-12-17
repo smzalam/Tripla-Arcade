@@ -3,6 +3,7 @@ import Guide from '../Guide'
 import ChooseGame from '../Games/ChooseGame'
 import Profile from '../Profile'
 import classNames from 'classnames'
+import JoinGame from '../Games/JoinGame'
 
 function Navigation({ isActive }) {
 
@@ -20,6 +21,7 @@ function Navigation({ isActive }) {
             {isActive === "/guide" && <Guide />}
             {isActive === "/choose_games" && <ChooseGame />}
             {isActive == "/profile" && <Profile />}
+            {isActive == "/join" && <JoinGame />}
         </div>
     )
 }

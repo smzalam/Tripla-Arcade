@@ -2,10 +2,10 @@ import classNames from "classnames"
 import Home from "./Home"
 import Navigation from "./Navigations/Navigation"
 import NavMenu from "../components/Navigation/NavMenu"
-import { useState } from "react"
+import { useNavigationContext } from "../context/NavigationContext"
 
 const Dashboard = () => {
-  const [isActive, setIsActive] = useState('/');
+  const { isActive, setIsActive } = useNavigationContext();
 
   return (
     <div

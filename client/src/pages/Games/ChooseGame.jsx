@@ -1,44 +1,42 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
-import IMAGES from '../../assets/images/images';
-import AuthModal from '../../components/AuthModal';
-import { useUserContext } from '../../context/AuthContext';
-import JoinGame from './JoinGame';
-import ActiveSlider from '../../components/ActiveSlider';
-import { getRandomInt } from '../../utils/helper_functions'
+import Carousel from '../../components/Slider/Carousel';
+import SliderItem from '../../components/Slider/SliderItem'
 
 function ChooseGame() {
 
-    const [game, setGame] = useState(null);
-    const [day, setDay] = useState(new Date().getMinutes())
+    // const [game, setGame] = useState(null);
+    // const [day, setDay] = useState(new Date().getMinutes())
+
     const games = [
-        'Connect4',
         'TicTacToe',
+        'QuicQuakQuad',
         'TypeRacer'
     ]
-    const images = {
-        'Connect4': IMAGES.connect4,
-        'TicTacToe': IMAGES.ttt,
-        'TypeRacer': IMAGES.ultttt
 
-    }
-    useEffect(() => {
-        let chosenGame = games[getRandomInt(2)]
-        console.log(chosenGame)
-        while (game === chosenGame) {
-            chosenGame = games[getRandomInt(2)]
-        }
+    // useEffect(() => {
+    //     let chosenGame = games[getRandomInt(2)]
+    //     console.log(chosenGame)
+    //     while (game === chosenGame) {
+    //         chosenGame = games[getRandomInt(2)]
+    //     }
 
-        if (game !== chosenGame) {
-            setGame(games[getRandomInt(4)])
-            console.log('CURRENT DAY: ', day)
-            console.log('CURRENT GAME: ', game)
-        }
-    }, [day])
+    //     if (game !== chosenGame) {
+    //         setGame(games[getRandomInt(4)])
+    //         console.log('CURRENT DAY: ', day)
+    //         console.log('CURRENT GAME: ', game)
+    //     }
+    // }, [day])
 
     return (
         <>
-            {game && <ActiveSlider game={game} imageSrc={images[game]} />}
+            <Carousel>
+                {
+                    games.map(game => (
+                        <SliderItem key={game} game={game} />
+                    ))
+                }
+            </Carousel>
+            {/* {game && <ActiveSlider game={game} />} */}
             {/* {game && <JoinGame game={game} ></JoinGame>} */}
             {/* {!game &&
                 <div className='bg-yellow-600 bg-opacity-60 grid grid-rows-[0.3fr_1fr] w-full h-full p-2 border-8 border-black'>

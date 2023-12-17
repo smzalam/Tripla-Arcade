@@ -19,9 +19,12 @@ const NavButtons = ({ isActive, setIsActive, url, Icon, imageAlt }) => {
         >
             <Icon className={
                 classNames(
-                    'text-secondary w-16 h-16 pt-2',
+                    'w-16 h-16 pt-2',
                     {
                         'text-primary': isActive === url
+                    },
+                    {
+                        'text-secondary': isActive !== url
                     }
                 )
                 } />
