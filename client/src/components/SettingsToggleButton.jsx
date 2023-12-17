@@ -5,11 +5,11 @@ const SettingsToggleButton = ({ settingName, settingToggle, margin_top, margin_b
     const [isSelected, setIsSelected] = useState(false)
 
     return (
-        <div className='grid grid-cols-[1fr_2fr]'>
+        <div className='flex justify-around pr-10'>
             <div
                 className={
                     classnames(
-                        'flex items-center justify-center',
+                        'grow flex items-center justify-center',
                         margin_top,
                         margin_bottom
                     )
@@ -26,9 +26,9 @@ const SettingsToggleButton = ({ settingName, settingToggle, margin_top, margin_b
                 }
                 className={
                     classnames(
-                        "flex w-40 h-max bg-gray-600 mx-7 my-3 transition-all duration-500",
+                        "shrink flex w-40 h-max bg-gray-600 mx-7 my-3 transition-all duration-500",
                         {
-                            'bg-green-500': isSelected
+                            'bg-secondary': isSelected
                         },
                         margin_top,
                         margin_bottom

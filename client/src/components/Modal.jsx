@@ -16,11 +16,11 @@ function Modal({ openModal, closeModal, children }) {
     <dialog
       ref={ref}
       onCancel={closeModal}
-      className="h-max w-max rounded-lg bg-gray-800"
+      className="h-max w-1/2 rounded-lg bg-background"
     >
-      <div className="grid grid-cols-[1.9fr_0.1fr]">
+      <div className="flex justify-between">
         {children}
-        <button onClick={closeModal} className="flex justify-end items-center w-full h-full hover:bg-gray-200 hover:opacity-50 p-10 text-blue-500">
+        <button onClick={closeModal} className="hover:bg-gray-200 hover:opacity-50 p-10 text-text hover:text-black">
           X
         </button>
       </div>

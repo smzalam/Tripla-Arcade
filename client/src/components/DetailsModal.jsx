@@ -4,7 +4,7 @@
 import Modal from "./Modal"
 // import SettingsToggleButton from "./SettingsToggleButton";
 
-const SettingsModal = ({ modal, setModal, game, imageSrc }) => {
+const SettingsModal = ({ modal, setModal, game }) => {
     // const { timerSetting, wallsSetting, powerUpsSetting } = useSettingsContext();
     return (
         <Modal
@@ -12,10 +12,10 @@ const SettingsModal = ({ modal, setModal, game, imageSrc }) => {
             closeModal={() => setModal(false)}
         >
             <div
-                className="flex flex-row w-full h-full justify-center items-center"
+                className="flex justify-center items-stretch flex-row flex-nowrap content-center h-full gap-[5px] p-[15px]"
             >
                 <div
-                    className="flex flex-col  justify-center items-center basis-1/2 gap-9"
+                    className="order-none grow-[2] self-auto"
                 >
                     <text
                         className="text-4xl text-white mt-8"
@@ -25,11 +25,11 @@ const SettingsModal = ({ modal, setModal, game, imageSrc }) => {
                     <div
                         className="w-5/6 border-white border-2 rounded-md mb-10"
                     >
-                        <img src={imageSrc} className="w-full h-full" />
+                        <img className="w-full h-full" />
                     </div>
                 </div>
                 <div
-                    className="basis-1/4 text-white"
+                    className="order-none grow shrink"
                 >
                     <p>Text: </p>
                     <p>Text: </p>
