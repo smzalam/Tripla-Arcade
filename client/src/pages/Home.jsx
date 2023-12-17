@@ -6,7 +6,7 @@ const Home = ({ isActive, setIsActive }) => {
       <div
         className="font-heading text-text text-7xl col-start-1 col-end-4 justify-self-center place-self-center">
         <button
-        className="pr-3 pl-1"
+        className="pr-3 pl-3"
           onClick={() => { setIsActive('/') }}
         >
         {isActive === '/' ? 'tripla arcade' : 'tripla'}

@@ -13,6 +13,7 @@ export default {
         'primary': 'var(--primary)',
         'secondary': 'var(--secondary)',
         'accent': 'var(--accent)',
+        'nav': 'var(--nav)',
       },
       fontSize: {
         sm: '0.750rem',

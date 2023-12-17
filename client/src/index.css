@@ -14,6 +14,7 @@
         --primary: #bb8fdb;
         --secondary: #502470;
         --accent: #f7bf18;
+        --nav: #000000;
     }
 
     .dark {
@@ -22,6 +23,7 @@
         --primary: #502470;
         --secondary: #bb8fdb;
         --accent: #e7b008;
+        --nav: #ffffff;
     }
 }
 
