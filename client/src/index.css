@@ -13,7 +13,7 @@
         --background: #d8cce1;
         --primary: #bb8fdb;
         --secondary: #502470;
-        --accent: #f7bf18;
+        --accent: #f59e0b;
         --nav: #000000;
     }
 
@@ -22,20 +22,20 @@
         --background: #2a1e33;
         --primary: #502470;
         --secondary: #bb8fdb;
-        --accent: #e7b008;
+        --accent: #eab308;
         --nav: #ffffff;
     }
 }
 
 @layer components {
     .carousel {
-        @apply relative w-full h-full;
+        @apply relative;
         perspective: 500px;
         transform-style: preserve-3d;
     }
 
     .card-container {
-        @apply absolute left-[17%] top-[7%] w-[55rem] h-[30rem] blur-[calc(var(--abs-offset))] transition-all duration-[0.3s] ease-[ease-out];
+        @apply absolute left-[17%] top-[7%] w-[85%] h-[85%] blur-[calc(var(--abs-offset))] transition-all duration-[0.3s] ease-[ease-out];
         transform: rotateY(calc(var(--offset) * 50deg)) scaleY(calc(1 + var(--abs-offset) * -0.4)) translateZ(calc(var(--abs-offset) * -30rem)) translateX(calc(var(--direction) * -5rem));
     }
 

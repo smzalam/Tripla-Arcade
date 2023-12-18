@@ -53,7 +53,7 @@ const Carousel = ({ children }) => {
                         '--active': i === active ? 1 : 0,
                         '--offset': (active - i) / 3,
                         '--direction': Math.sign(active - i),
-                        '--abs-offset': Math.abs(active - i) / 3,
+                        '--abs-offset': Math.abs(active - i) / 2,
                         'pointer-events': active === i ? 'auto' : 'none',
                         'opacity': Math.abs(active - i) >= MAX_VISIBILITY ? '0' : '1',
                         'display': Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block',
@@ -61,7 +61,7 @@ const Carousel = ({ children }) => {
                         {child}
                     </div>
                 ))}
-                <div className='left-[19%] absolute flex flex-row place-content-center gap-96 bottom-10'>
+                <div className='left-[19%] absolute flex flex-row place-content-center gap-96 xl:gap-[48rem] bottom-10'>
 
                     {active > 0 &&
                         <button
