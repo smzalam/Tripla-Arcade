@@ -4,8 +4,11 @@ import Navigation from "./Navigations/Navigation"
 import NavMenu from "../components/Navigation/NavMenu"
 import { useNavigationContext } from "../context/NavigationContext"
 
+
 const Dashboard = () => {
   const { isActive, setIsActive } = useNavigationContext();
+
+
 
   return (
     <div

@@ -8,6 +8,7 @@ const SettingsProvider = ({ children }) => {
     const [isWalls, setIsWalls] = useState(false);
     const [isPowerUps, setIsPowerUps] = useState(false);
     const [darkMode, setDarkMode] = useState(true);
+    const [inGame, setInGame] = useState(false);
 
     useEffect(() => {
       let currentMode = darkMode ? 'light' : 'dark'
@@ -38,6 +39,8 @@ const SettingsProvider = ({ children }) => {
         wallsSetting,
         powerUpsSetting,
         darkModeSetting,
+        inGame,
+        setInGame,
     };
 
     return (

@@ -5,13 +5,22 @@ import SettingsButton from '../SettingsButton'
 import { Cog8ToothIcon } from '@heroicons/react/24/outline'
 import IMAGES from '../../assets/images/images'
 import classNames from 'classnames'
+import { useSettingsContext } from '../../context/SettingsContext'
 
 function NavMenu({ isActive, setIsActive }) {
+
+    const { inGame } = useSettingsContext();
 
     return (
         <div className={
             classNames (
-                `font-body flex flex-row flex-initial transition justify-center p-4`,
+                `font-body flex-row flex-initial transition justify-center p-4`,
+                {
+                    'flex' : !inGame
+                },
+                {
+                    'hidden' : inGame
+                },
                 {
                     'flex-row' : isActive === '/'
                 },

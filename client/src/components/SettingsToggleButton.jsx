@@ -15,7 +15,7 @@ const SettingsToggleButton = ({ settingName, settingToggle, margin_top, margin_b
                     )
                 }
             >
-                {settingName}
+                <p>{settingName}</p>
             </div>
             <div
                 onClick={
