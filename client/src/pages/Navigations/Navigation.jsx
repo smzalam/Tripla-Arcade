@@ -4,6 +4,7 @@ import ChooseGame from '../Games/ChooseGame'
 import Profile from '../Profile'
 import classNames from 'classnames'
 import JoinGame from '../Games/JoinGame'
+import WaitingScreen from '../Games/WaitingScreen'
 
 function Navigation({ isActive }) {
 
@@ -21,6 +22,7 @@ function Navigation({ isActive }) {
             {isActive === "/guide" && <Guide />}
             {isActive === "/choose_games" && <ChooseGame />}
             {isActive == "/profile" && <Profile />}
+            {isActive == "/waiting" && <WaitingScreen />}
             {isActive == "/join" && <JoinGame />}
         </div>
     )
