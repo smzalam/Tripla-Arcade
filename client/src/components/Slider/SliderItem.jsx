@@ -5,7 +5,7 @@ import ModalButtons from './Buttons/ModalButtons';
 import PlayButton from './Buttons/PlayButton';
 import JoinButton from './Buttons/JoinButton';
 
-const SliderItem = ({game}) => {
+const SliderItem = ({activateGame, activateJoin, game}) => {
     const [detailsModal, setDetailsModal] = useState(false);
     const [powerUpModal, setPowerUpModal] = useState(false);
 
@@ -30,8 +30,8 @@ const SliderItem = ({game}) => {
                     />
                 </div>
                 <div className='flex gap-6 justify-end w-full items-center px-6'>
-                    <PlayButton />
-                    <JoinButton />
+                    <PlayButton activateGame={activateGame} game={game} />
+                    <JoinButton activateJoin={activateJoin} game={game} />
                 </div>
             </div>
         </div>

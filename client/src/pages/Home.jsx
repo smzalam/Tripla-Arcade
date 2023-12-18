@@ -1,12 +1,23 @@
+import classNames from "classnames";
+import { useSettingsContext } from "../context/SettingsContext";
 
 const Home = ({ isActive, setIsActive }) => {
+  
+  const { inGame } = useSettingsContext();
 
   return (
     <div className={`bg-background grid`}>
       <div
         className="font-heading text-text text-7xl col-start-1 col-end-4 justify-self-center place-self-center">
         <button
-        className="pr-3 pl-3"
+        className={
+          classNames(
+            "pr-3 pl-3",
+            {
+                'hidden' : inGame
+            }
+          )
+        }
           onClick={() => { setIsActive('/') }}
         >
         {isActive === '/' ? 'tripla arcade' : 'tripla'}

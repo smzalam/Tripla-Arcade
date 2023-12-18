@@ -1,18 +1,16 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import Carousel from '../../components/Slider/Carousel';
 import SliderItem from '../../components/Slider/SliderItem'
+import JoinGame from './JoinGame';
+import { useGameContext } from '../../context/GameContext';
+import Game from './Game';
+import { useSettingsContext } from '../../context/SettingsContext';
 
 function ChooseGame() {
 
     // const [game, setGame] = useState(null);
     // const [day, setDay] = useState(new Date().getMinutes())
-
-    const games = [
-        'TicTacToe',
-        'QuicQuakQuad',
-        'TypeRacer'
-    ]
-
     // useEffect(() => {
     //     let chosenGame = games[getRandomInt(2)]
     //     console.log(chosenGame)
@@ -27,15 +25,59 @@ function ChooseGame() {
     //     }
     // }, [day])
 
+    const { setInGame } = useSettingsContext();
+    const [mode, setMode] = useState('choose');
+    const { socket } = useGameContext();
+    const games = [
+        'TicTacToe',
+        'QuicQuakQuad',
+        'TypeRacer'
+    ]
+
+    const activateGame = (game) => {
+        setMode('play')
+        setInGame(game)
+    }
+
+    const activateJoin = (game) => {
+        setMode('join');
+        setInGame(game)
+    }
+
+    const deactivateGame = () => {
+        setMode('choose')
+        setInGame(false)
+    }
+
+    useEffect(() => {
+        socket.on('roomFull', () => {
+            setMode('play')
+        })
+        socket.on('fullRoomMessage', message => {
+            console.log(message.message)
+        })
+    })
+
     return (
         <>
-            <Carousel>
-                {
-                    games.map(game => (
-                        <SliderItem key={game} game={game} />
-                    ))
-                }
-            </Carousel>
+            {mode === 'choose' &&
+                <Carousel>
+                    {
+                        games.map(game => (
+                            <SliderItem key={game} activateGame={activateGame} activateJoin={activateJoin} game={game} />
+                        ))
+                    }
+                </Carousel>
+            }
+            {/* {mode === 'waiting' &&
+                <WaitingScreen setMode={setMode} />
+            } */}
+            {mode === 'join' &&
+                <JoinGame setMode={setMode} deactivateGame={deactivateGame} />
+            }
+            {mode === 'play' &&
+                <Game deactivateGame={deactivateGame} />
+            }
             {/* {game && <ActiveSlider game={game} />} */}
             {/* {game && <JoinGame game={game} ></JoinGame>} */}
             {/* {!game &&

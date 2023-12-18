@@ -1,12 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
 import IMAGES from '../../assets/images/images';
-import { useNavigationContext } from "../../context/NavigationContext";
 
-function JoinGame() {
-    const { setIsActive } = useNavigationContext();
-
-    const [rivalUserName, setRivalUserName] = useState("");
+function JoinGame({ setMode, deactivateGame }) {
 
     return (
         <>
@@ -17,13 +12,14 @@ function JoinGame() {
                 <div className="place-self-center flex flex-row w-full h-2/4 justify-center items-center gap-10">
                     <input
                         placeholder='Room code...'
-                        onChange={
-                            (event) => {
-                                setRivalUserName(event.target.value)
-                            }
-                        }
+                        // onChange={
+                        //     (event) => {
+                        //         setRoom(event.target.value)
+                        //     }
+                        // }
                         className="bg-white rounded-lg  p-3 w-1/2 h-1/4" />
                     <button
+                        onClick={() => { setMode('play') }}
                         className="bg-yellow-500 hover:bg-primary hover:text-text active:bg-black active:text-text rounded-lg w-1/4 h-1/4 text-2xl">
                         Join Game
                     </button>
@@ -31,8 +27,7 @@ function JoinGame() {
 
                 <button
                     className='hover:bg-primary active:bg-black w-1/4 rounded-lg grid'
-                    onClick={() => setIsActive('/choose_games')
-                    }
+                    onClick={deactivateGame}
                 >
                     <img
                         src={IMAGES.backIcon}
