@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ReadyButton from './ReadyButton'
 // import { useGameContext } from "../../context/GameContext";
 import IMAGES from "../../assets/images/images";
-import { nanoid } from 'nanoid';
 
-const WaitingScreen = ({ deactivateGame }) => {
+const WaitingScreen = ({ deactivateGame, room }) => {
     const [ready, setReady] = useState(false);
-    const [room, setRoom] = useState('');
     // const { socket } = useGameContext();
-    useEffect(() => {
-        const room = nanoid();
-        setRoom(room);
-        // socket.emit('joinRoom', room)
-    }, [])
+
 
     return (
         <div className="bg-secondary rounded-lg flex flex-col justify-around items-center w-full h-full ">
@@ -20,7 +14,7 @@ const WaitingScreen = ({ deactivateGame }) => {
                 <div className=" text-4xl rounded-lg">
                     Room Code:
                 </div>
-                <div className="text-2xl">
+                <div className="text-3xl">
                     {room}
                 </div>
             </div>

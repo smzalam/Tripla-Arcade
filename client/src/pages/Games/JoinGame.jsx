@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
+import { useState } from 'react';
 import IMAGES from '../../assets/images/images';
 
-function JoinGame({ setMode, deactivateGame }) {
+function JoinGame({ joinRoom, deactivateGame }) {
+
+    const [room, setRoom] = useState('');
 
     return (
         <>
@@ -12,14 +15,14 @@ function JoinGame({ setMode, deactivateGame }) {
                 <div className="place-self-center flex flex-row w-full h-2/4 justify-center items-center gap-10">
                     <input
                         placeholder='Room code...'
-                        // onChange={
-                        //     (event) => {
-                        //         setRoom(event.target.value)
-                        //     }
-                        // }
+                        onChange={
+                            (event) => {
+                                setRoom(event.target.value)
+                            }
+                        }
                         className="bg-white rounded-lg  p-3 w-1/2 h-1/4" />
                     <button
-                        onClick={() => { setMode('play') }}
+                        onClick={() => { joinRoom(room) }}
                         className="bg-yellow-500 hover:bg-primary hover:text-text active:bg-black active:text-text rounded-lg w-1/4 h-1/4 text-2xl">
                         Join Game
                     </button>

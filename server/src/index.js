@@ -46,8 +46,6 @@ io.on('connection', socket => {
     socket.on('joinRoom', async (room) => {
         let clientsInRoom = 0;
         if (io.sockets.adapter.rooms.has(room)) clientsInRoom = io.sockets.adapter.rooms.get(room).size
-        const clientID = socket.id
-        console.log(clientID)
         switch(clientsInRoom) {
             case 0:
                 socket.join(room);
@@ -57,7 +55,7 @@ io.on('connection', socket => {
             case 1: 
                 socket.join(room);
                 console.log(`User ${socket.id.substring(0,5)} has joined Room ${room}!`);
-                io.to(room).emit('roomFull', 'play')
+                io.to(room).emit('roomFull')
                 console.log(clientsInRoom)
                 break;
             case 2:
@@ -68,6 +66,8 @@ io.on('connection', socket => {
             default:
                 return numOfUsers
         }
+        // const clientID = socket.id
+        // console.log(clientID)
         // if (clientsInRoom !== 2) {
         //     socket.join(room)
         //     console.log(`User ${socket.id.substring(0,5)} has joined Room ${room}!`)
@@ -77,8 +77,14 @@ io.on('connection', socket => {
         // }
     })
 
-    socket.on('fullRoom', () => {
-        socket.emit('fullRoomMessage', {message: "This room is full!"})
+    // socket.on('roomFull', () => {
+    //     socket.emit('fullRoomMessage', {message: "This room is full!"})
+    // })
+
+    socket.on('leaveRoom', (room) => {
+        socket.leave(room);
+        io.to(room).emit('playerLeave')
+        console.log(`User ${socket.id.substring(0,5)} has left Room ${room}!`);
     })
 
 })

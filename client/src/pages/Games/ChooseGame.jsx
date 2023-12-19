@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Carousel from '../../components/Slider/Carousel';
 import SliderItem from '../../components/Slider/SliderItem'
 import JoinGame from './JoinGame';
 import { useGameContext } from '../../context/GameContext';
 import Game from './Game';
 import { useSettingsContext } from '../../context/SettingsContext';
+import { nanoid } from 'nanoid';
 
 function ChooseGame() {
 
@@ -27,7 +28,9 @@ function ChooseGame() {
 
     const { setInGame } = useSettingsContext();
     const [mode, setMode] = useState('choose');
+    const [room, setRoom] = useState('');
     const { socket } = useGameContext();
+
     const games = [
         'TicTacToe',
         'QuicQuakQuad',
@@ -35,8 +38,13 @@ function ChooseGame() {
     ]
 
     const activateGame = (game) => {
-        setMode('play')
         setInGame(game)
+        
+        const room = nanoid();
+        setRoom(room);
+        setMode('play')
+
+        socket.emit('joinRoom', room)
     }
 
     const activateJoin = (game) => {
@@ -44,19 +52,28 @@ function ChooseGame() {
         setInGame(game)
     }
 
+    const joinRoom = (room) => {
+        setRoom(room);
+        setMode('play')
+        
+        socket.emit('joinRoom', room)
+    }
+
     const deactivateGame = () => {
         setMode('choose')
         setInGame(false)
+        socket.emit('leaveRoom', room)
+        setRoom('')
     }
 
-    useEffect(() => {
-        socket.on('roomFull', () => {
-            setMode('play')
-        })
-        socket.on('fullRoomMessage', message => {
-            console.log(message.message)
-        })
-    })
+    // useEffect(() => {
+    //     socket.on('roomFull', () => {
+    //         setMode('play')
+    //     })
+    //     socket.on('fullRoomMessage', message => {
+    //         console.log(message.message)
+    //     })
+    // }, [])
 
     return (
         <>
@@ -73,10 +90,10 @@ function ChooseGame() {
                 <WaitingScreen setMode={setMode} />
             } */}
             {mode === 'join' &&
-                <JoinGame setMode={setMode} deactivateGame={deactivateGame} />
+                <JoinGame joinRoom={joinRoom} deactivateGame={deactivateGame} />
             }
             {mode === 'play' &&
-                <Game deactivateGame={deactivateGame} />
+                <Game deactivateGame={deactivateGame} room={room} />
             }
             {/* {game && <ActiveSlider game={game} />} */}
             {/* {game && <JoinGame game={game} ></JoinGame>} */}

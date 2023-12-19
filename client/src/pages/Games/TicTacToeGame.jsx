@@ -1,19 +1,41 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { useChatContext } from 'stream-chat-react';
 // import Board from '../../components/Board';
 // import ExitButton from '../../components/Buttons/ExitButton';
 // import ResetButton from '../../components/Buttons/ResetButton';
 import WaitingScreen from './WaitingScreen'
+import { useGameContext } from '../../context/GameContext';
 // import tttReducer from '../../reducers/tttReducer';
 // import { GAME_STATUS_TEXT, NEXT_PLAYER_TEXT, getInitialGameState } from '../../schemas/gameSchemas';
 
-function TicTacToeGame({ deactivateGame }) {
+function TicTacToeGame({ deactivateGame, room }) {
     // const client = useChatContext()
     // const players = Object.keys(channel.state.members)
     // const initialState = getInitialGameState(3, 3, () => "", players)
 
+    const { socket } = useGameContext();
     const [playersJoined, setPlayersJoined] = useState(false);
+
+
+    useEffect(() => {
+        socket.on('roomFull', () => {
+            setPlayersJoined(true);
+        })
+
+        socket.on('playerLeave', () => {
+            setPlayersJoined(false);
+        })
+
+        return() => {
+            socket.off('roomFull', () => {
+                setPlayersJoined(true);
+            })
+            socket.off('playerLeave',() => {
+                setPlayersJoined(false);
+            })
+        }
+    })
     // const [state, dispatch] = useReducer(tttReducer, initialState);
     // const { board, player, turn, status } = state
 
@@ -68,7 +90,11 @@ function TicTacToeGame({ deactivateGame }) {
 
     return (
         <>
-            {!playersJoined && <WaitingScreen deactivateGame={deactivateGame} />}
+            {!playersJoined && <WaitingScreen deactivateGame={deactivateGame} room={room} />}
+            {playersJoined && <div className='bg-background text-9xl text-text'>
+                <div>Hiii!!!!!</div>
+                <button className='text-text bg-primary' onClick={deactivateGame}>CLICK ME</button>
+                </div> }
             {/* {playersJoined &&
                 <div className="grid grid-rows-5 w-screen h-[82.5vh]">
                     <div className='row-start-1 grid grid-cols-3 w-screen h-full'>
@@ -102,8 +128,8 @@ function TicTacToeGame({ deactivateGame }) {
             //                 <MessageInput noFiles={enable} />
             //             </Window>
             //         </div> */}
-                    {/* </div> */}
-                    {/* // <div className='overflow-hidden row-start-4 place-self-center grid grid-cols-4 w-screen h-full'>
+            {/* </div> */}
+            {/* // <div className='overflow-hidden row-start-4 place-self-center grid grid-cols-4 w-screen h-full'>
 
         //             <button
         //                 onClick={
@@ -115,7 +141,7 @@ function TicTacToeGame({ deactivateGame }) {
         //                 className={`${exitButtonDisplay}`}
         //             >Exit</button>
         //         </div> */}
-                {/* </div > */}
+            {/* </div > */}
             {/* } */}
         </>
     );
