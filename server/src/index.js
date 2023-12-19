@@ -20,10 +20,10 @@ const io = new Server(server, {
 });
 
 const roomState = (numOfUsers) => {
-    switch(numOfUsers) {
+    switch (numOfUsers) {
         case 0:
             return 'empty'
-        case 1: 
+        case 1:
             return 'person'
         case 2:
             return 'full'
@@ -32,40 +32,88 @@ const roomState = (numOfUsers) => {
     }
 }
 
+const getRoomSockets = async (room) => {
+    const sockets = await io.in(room).fetchSockets()
+    const players = []
+    for (const socket of sockets) {
+        // console.log('HERE')
+        // console.log('ID: ', socket.id);
+        // console.log('HANDSHAKE: ', socket.handshake);
+        // console.log('ROOMS: ', socket.rooms);
+        // console.log('DATA: ', socket.data);
+        // console.log('HERE')
+        players.push(socket.id)
+    }
+    return players
+}
+
 io.on('connection', socket => {
-    console.log(`User ${socket.id.substring(0,5)} connected!`)
+    console.log(`User ${socket.id.substring(0, 5)} connected!`)
 
     socket.on('clicked', data => {
         console.log(data)
     })
 
     socket.on('disconnect', () => {
-        console.log(`User ${socket.id.substring(0,5)} disconnected!`)
+        console.log(`User ${socket.id.substring(0, 5)} disconnected!`)
     })
 
-    socket.on('joinRoom', async (room) => {
+    socket.on('getPlayersInRoom', async (room) => {
+        const sockets = await io.in(room).fetchSockets();
+        return sockets;
+    })
+
+    socket.on('joinRoom', (room) => {
         let clientsInRoom = 0;
         if (io.sockets.adapter.rooms.has(room)) clientsInRoom = io.sockets.adapter.rooms.get(room).size
-        switch(clientsInRoom) {
-            case 0:
-                socket.join(room);
-                console.log(`User ${socket.id.substring(0,5)} has joined Room ${room}!`);
-                console.log(clientsInRoom)
-                break;
-            case 1: 
-                socket.join(room);
-                console.log(`User ${socket.id.substring(0,5)} has joined Room ${room}!`);
-                io.to(room).emit('roomFull')
-                console.log(clientsInRoom)
-                break;
-            case 2:
-                console.log('FULL ROOM')
-                socket.emit('fullRoom')
-                console.log(clientsInRoom)
-                return 'full'
-            default:
-                return numOfUsers
+        if (clientsInRoom === 0 || clientsInRoom === 1) {
+            socket.join(room);
+            getRoomSockets(room)
+                .then(players => {
+                    console.log('PLAYERS: ', players);
+                    io.to(room).emit('playerJoin', players);
+                });
+            console.log(`User ${socket.id.substring(0, 5)} has joined Room ${room}!`);
+            console.log(clientsInRoom)
         }
+        if (clientsInRoom === 1) {
+            io.to(room).emit('roomFull')
+        }
+        if (clientsInRoom === 2) {
+            console.log('FULL ROOM')
+            socket.emit('fullRoom')
+            console.log(clientsInRoom)
+        }
+        // switch (clientsInRoom) {
+        //     case 0:
+        //         socket.join(room);
+        //         getRoomSockets(room)
+        //             .then(players => {
+        //                 console.log('PLAYERS: ', players);
+        //                 io.to(room).emit('playerJoin', players);
+        //             });
+        //         console.log(`User ${socket.id.substring(0, 5)} has joined Room ${room}!`);
+        //         console.log(clientsInRoom)
+        //         break;
+        //     case 1:
+        //         socket.join(room);
+        //         getRoomSockets(room)
+        //             .then(players => {
+        //                 console.log('PLAYERS: ', players);
+        //                 io.to(room).emit('playerJoin', players);
+        //             });
+        //         console.log(`User ${socket.id.substring(0, 5)} has joined Room ${room}!`);
+        //         io.to(room).emit('roomFull')
+        //         console.log(clientsInRoom)
+        //         break;
+        //     case 2:
+        //         console.log('FULL ROOM')
+        //         socket.emit('fullRoom')
+        //         console.log(clientsInRoom)
+        //         return 'full'
+        //     default:
+        //         return numOfUsers
+        // }
         // const clientID = socket.id
         // console.log(clientID)
         // if (clientsInRoom !== 2) {
@@ -83,8 +131,12 @@ io.on('connection', socket => {
 
     socket.on('leaveRoom', (room) => {
         socket.leave(room);
-        io.to(room).emit('playerLeave')
-        console.log(`User ${socket.id.substring(0,5)} has left Room ${room}!`);
+        getRoomSockets(room)
+                .then(players => {
+                    console.log('PLAYERS: ', players);
+                    io.to(room).emit('playerLeave', players)
+                });
+        console.log(`User ${socket.id.substring(0, 5)} has left Room ${room}!`);
     })
 
 })
@@ -92,7 +144,7 @@ io.on('connection', socket => {
 
 
 server.listen(3001, () => { console.log("Server is running on port 3001.") })
-instrument(io, { auth: false,  mode: "development" })
+instrument(io, { auth: false, mode: "development" })
 
 
 // app.use(cors());

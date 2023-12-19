@@ -32,9 +32,9 @@ function ChooseGame() {
     const { socket } = useGameContext();
 
     const games = [
-        'TicTacToe',
         'QuicQuakQuad',
-        'TypeRacer'
+        'TypeRacer',
+        'TicTacToe',
     ]
 
     const activateGame = (game) => {
