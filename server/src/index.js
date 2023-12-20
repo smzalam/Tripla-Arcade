@@ -47,14 +47,50 @@ const getRoomSockets = async (room) => {
     return players
 }
 
+const generateGrid = (rows, columns, mapper) => {
+    return Array(rows).fill().map(() => Array(columns).fill().map(mapper))
+}
+const newBoard = (rows, columns, mapper) => generateGrid(rows, columns, mapper);
+
+const getInitialGameState = (rows, cols, mapper) => {
+    const gameState = {
+        room: '',
+        board: newBoard(rows, cols, mapper),
+        players: [],
+        turn: 'X',
+        status: 'start'
+    }
+
+    return gameState
+}
+const initialGameState = getInitialGameState(3, 3, () => "");
+
+// if (players.length !== 0) {
+//     gameState['next_player'] = {
+//         'X': players[1],
+//         'O': players[0]
+//     }
+//     gameState['currentPlayer'] = players[0]
+//     gameState['playersJoined'] = players.length === 2 ? true : false
+// }
+
 io.on('connection', socket => {
     console.log(`User ${socket.id.substring(0, 5)} connected!`)
 
-    socket.on('clicked', data => {
-        console.log(data)
-    })
-
     socket.on('disconnect', () => {
+        getRoomSockets(initialGameState.room)
+            .then(playerIds => {
+                console.log('PLAYERIDS AFTER USER LEFT: ', playerIds)
+                const remainingPlayers = initialGameState.players.filter((player) => {
+                    if (playerIds.includes(player)) {
+                        return player
+                    }
+                })
+                initialGameState.players = remainingPlayers
+                initialGameState.playersJoined = initialGameState.players.length === 2 ? true : false
+                console.log(initialGameState)
+                io.to(initialGameState.room).emit('playerLeave', initialGameState)
+            });
         console.log(`User ${socket.id.substring(0, 5)} disconnected!`)
     })
 
@@ -68,76 +104,74 @@ io.on('connection', socket => {
         if (io.sockets.adapter.rooms.has(room)) clientsInRoom = io.sockets.adapter.rooms.get(room).size
         if (clientsInRoom === 0 || clientsInRoom === 1) {
             socket.join(room);
-            getRoomSockets(room)
-                .then(players => {
-                    console.log('PLAYERS: ', players);
-                    io.to(room).emit('playerJoin', players);
-                });
             console.log(`User ${socket.id.substring(0, 5)} has joined Room ${room}!`);
             console.log(clientsInRoom)
         }
-        if (clientsInRoom === 1) {
-            io.to(room).emit('roomFull')
-        }
+        // if (clientsInRoom === 1) {
+        getRoomSockets(room)
+            .then(playerIds => {
+                console.log(initialGameState)
+                initialGameState.room = room
+                playerIds.forEach(playerId => {
+                    if (!initialGameState.players.includes(playerId)) {
+                        initialGameState.players.push(playerId)
+                    }
+                    return playerId
+                })
+                console.log(initialGameState)
+                console.log('PLAYERS IN SERVER: ', initialGameState.players);
+                io.to(initialGameState.room).emit('playerJoin', initialGameState);
+                if (initialGameState.players.length === 2) io.to(initialGameState.room).emit('roomFull', initialGameState)
+            });
+        // }
         if (clientsInRoom === 2) {
             console.log('FULL ROOM')
             socket.emit('fullRoom')
             console.log(clientsInRoom)
         }
-        // switch (clientsInRoom) {
-        //     case 0:
-        //         socket.join(room);
-        //         getRoomSockets(room)
-        //             .then(players => {
-        //                 console.log('PLAYERS: ', players);
-        //                 io.to(room).emit('playerJoin', players);
-        //             });
-        //         console.log(`User ${socket.id.substring(0, 5)} has joined Room ${room}!`);
-        //         console.log(clientsInRoom)
-        //         break;
-        //     case 1:
-        //         socket.join(room);
-        //         getRoomSockets(room)
-        //             .then(players => {
-        //                 console.log('PLAYERS: ', players);
-        //                 io.to(room).emit('playerJoin', players);
-        //             });
-        //         console.log(`User ${socket.id.substring(0, 5)} has joined Room ${room}!`);
-        //         io.to(room).emit('roomFull')
-        //         console.log(clientsInRoom)
-        //         break;
-        //     case 2:
-        //         console.log('FULL ROOM')
-        //         socket.emit('fullRoom')
-        //         console.log(clientsInRoom)
-        //         return 'full'
-        //     default:
-        //         return numOfUsers
-        // }
-        // const clientID = socket.id
-        // console.log(clientID)
-        // if (clientsInRoom !== 2) {
-        //     socket.join(room)
-        //     console.log(`User ${socket.id.substring(0,5)} has joined Room ${room}!`)
-        // }
-        // if (clientsInRoom === 2) {
-        //     io.to(room).emit('roomFull', 'play')
-        // }
     })
 
     // socket.on('roomFull', () => {
     //     socket.emit('fullRoomMessage', {message: "This room is full!"})
     // })
 
-    socket.on('leaveRoom', (room) => {
-        socket.leave(room);
-        getRoomSockets(room)
-                .then(players => {
-                    console.log('PLAYERS: ', players);
-                    io.to(room).emit('playerLeave', players)
-                });
-        console.log(`User ${socket.id.substring(0, 5)} has left Room ${room}!`);
+    socket.on('leaveRoom', () => {
+        socket.leave(initialGameState.room);
+        getRoomSockets(initialGameState.room)
+            .then(playerIds => {
+                console.log('PLAYERIDS AFTER USER LEFT: ', playerIds)
+                const remainingPlayers = initialGameState.players.filter((player) => {
+                    if (playerIds.includes(player)) {
+                        return player
+                    }
+                })
+                initialGameState.players = remainingPlayers
+                initialGameState.playersJoined = initialGameState.players.length === 2 ? true : false
+                console.log(initialGameState)
+                io.to(initialGameState.room).emit('playerLeave', initialGameState)
+            });
+        console.log(`User ${socket.id.substring(0, 5)} has left Room ${initialGameState.room}!`);
     })
+
+    socket.on('gameStart', (initialGameState) => {
+        console.log('HI: ', initialGameState)
+        if (initialGameState.players.length === 2) {
+            initialGameState['next_player'] = {
+                'X': initialGameState.players[1],
+                'O': initialGameState.players[0]
+            }
+            initialGameState['currentPlayer'] = initialGameState.players[0]
+            initialGameState['playersJoined'] = initialGameState.players.length === 2 ? true : false
+            console.log(initialGameState)
+        }
+        io.to(initialGameState.room).emit('gameStartState', initialGameState)
+    })
+
+    socket.on('playerMove', data => {
+        const newData = { ...data, playerID: socket.id }
+        io.to(data.room).emit('gameMove', newData)
+    })
+
 
 })
 

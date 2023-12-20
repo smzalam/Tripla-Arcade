@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import Board from '../../components/Board';
 import ExitButton from '../../components/Buttons/ExitButton';
 // import ResetButton from '../../components/Buttons/ResetButton';
 import WaitingScreen from './WaitingScreen'
 import { useGameContext } from '../../context/GameContext';
 import { useSettingsContext } from '../../context/SettingsContext';
-// import tttReducer from '../../reducers/tttReducer';
+import tttReducer from '../../reducers/tttReducer';
 import { GAME_STATUS_TEXT, NEXT_PLAYER_TEXT, getInitialGameState } from '../../schemas/gameSchemas';
 
 
@@ -14,38 +14,64 @@ function TicTacToeGame({ deactivateGame, room }) {
 
     const { socket } = useGameContext();
     const { inGame: game } = useSettingsContext();
-    const [playersJoined, setPlayersJoined] = useState(false);
-    const [players, setPlayers] = useState([]);
-    const initialState = getInitialGameState(3, 3, () => "", players)
-
+    const [gameState, setGameState] = useState({});
+    // const [players, setPlayers] = useState([]);
+    // const initialState = getInitialGameState(3, 3, () => "", players)
+    // const [state, dispatch] = useReducer(tttReducer, initialState);
+    // console.log(player)
 
     useEffect(() => {
-        socket.on('roomFull', () => {
-            setPlayersJoined(true);
+        socket.on('roomFull', (initialGameState) => {
+            console.log(initialGameState)
+            socket.emit('gameStart', initialGameState)
         })
 
-        socket.on('playerJoin', (playerIds) => {
-            const newPlayers = playerIds
-            setPlayers(newPlayers)
-            console.log(newPlayers)
-            console.log(players)
+        socket.on('gameStartState', (initialGameState) => {
+            console.log(initialGameState)
+            setGameState(initialGameState)
         })
 
-        socket.on('playerLeave', () => {
-            setPlayersJoined(false);
+        socket.on('playerJoin', (updatedGameState) => {
+            setGameState(updatedGameState);
         })
+
+        socket.on('playerLeave', (updatedGameState) => {
+            setGameState(updatedGameState);
+        })
+
+        // socket.on('gameMove', data => {
+        //     console.log('DATA: ', data)
+        //     const { x, y } = data
+        //     dispatch({
+        //         type: 'CLICK',
+        //         payload: { x, y },
+        //         currentPlayer: data.playerID,
+        //         changeTurn: 'true',
+        //         default: initialState
+        //     })
+        // })
 
         return () => {
-            socket.off('roomFull', () => {
-                setPlayersJoined(true);
+            socket.off('roomFull', (initialGameState) => {
+                console.log(initialGameState)
+                socket.emit('gameStart', initialGameState)
             })
-            socket.off('playerLeave', () => {
-                setPlayersJoined(false);
+    
+            socket.off('gameStartState', (initialGameState) => {
+                console.log(initialGameState)
+                setGameState(initialGameState)
+            })
+    
+            socket.off('playerJoin', (updatedGameState) => {
+                setGameState(updatedGameState);
+            })
+    
+            socket.off('playerLeave', (updatedGameState) => {
+                setGameState(updatedGameState);
             })
         }
     })
-    // const [state, dispatch] = useReducer(tttReducer, initialState);
-    const { board, player, turn, status } = initialState
+    const { playersJoined, board, currentPlayer, turn, status } = gameState
 
     // const gameMove = async (x, y) => {
     //     await channel.sendEvent({
@@ -102,19 +128,19 @@ function TicTacToeGame({ deactivateGame, room }) {
 
     return (
         <>
-            {!playersJoined && <WaitingScreen deactivateGame={deactivateGame} room={room} />}
+            {!playersJoined && <WaitingScreen deactivateGame={() => {deactivateGame()}} room={room} />}
             {playersJoined && <div className='bg-background text-9xl text-text'>
                 <div className='flex flex-col justify-center h-full gap-10'>
-                    <div className='absolute top-10 flex flex-row'>
-                        <ExitButton display={(status !== 'finish') ? 'grid' : 'grid'} deactivateGame={deactivateGame} />
+                    <div className='absolute xl:top-[5%] flex flex-row'>
+                        <ExitButton display={(status !== 'finish') ? 'grid' : 'grid'} deactivateGame={() => {deactivateGame()}} />
                     </div>
                     <div className='flex flex-row justify-center'>
-                        <div className='text-3xl text-yellow-500 font-bold'>
-                            {NEXT_PLAYER_TEXT[status](player)}
-                            {GAME_STATUS_TEXT[status](player)}
+                        <div className='text-3xl text-text font-bold'>
+                            {NEXT_PLAYER_TEXT[status](currentPlayer)}
+                            {GAME_STATUS_TEXT[status](currentPlayer)}
                         </div>
                     </div>
-                    <div className='col-start-2 place-self-center'>
+                    <div className='place-self-center'>
                         <Board board={board} handleClick={gameMove} game={game} />
                     </div>
                     {/* <button className='text-text bg-primary' onClick={deactivateGame}>CLICK ME</button> */}

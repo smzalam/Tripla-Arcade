@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import IMAGES from '../../assets/images/images';
 
-function JoinGame({ joinRoom, deactivateGame }) {
+function JoinGame({ joinRoom, chooseGame }) {
 
     const [room, setRoom] = useState('');
 
@@ -30,7 +30,7 @@ function JoinGame({ joinRoom, deactivateGame }) {
 
                 <button
                     className='hover:bg-primary active:bg-black w-1/4 rounded-lg grid'
-                    onClick={deactivateGame}
+                    onClick={chooseGame}
                 >
                     <img
                         src={IMAGES.backIcon}

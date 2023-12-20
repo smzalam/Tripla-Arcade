@@ -59,10 +59,16 @@ function ChooseGame() {
         socket.emit('joinRoom', room)
     }
 
+    const chooseGame = () => {
+        setRoom('')
+        setMode('choose')
+        setInGame(false)
+    }
+
     const deactivateGame = () => {
         setMode('choose')
         setInGame(false)
-        socket.emit('leaveRoom', room)
+        socket.emit('leaveRoom')
         setRoom('')
     }
 
@@ -90,7 +96,7 @@ function ChooseGame() {
                 <WaitingScreen setMode={setMode} />
             } */}
             {mode === 'join' &&
-                <JoinGame joinRoom={joinRoom} deactivateGame={deactivateGame} />
+                <JoinGame joinRoom={joinRoom} chooseGame={chooseGame} />
             }
             {mode === 'play' &&
                 <Game deactivateGame={deactivateGame} room={room} />

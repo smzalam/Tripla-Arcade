@@ -3,7 +3,7 @@
 function Cell({ cell, handleClick, game }) {
 
     const CELL_STYLE = {
-        TicTacToe: 'bg-white h-[75px] w-[75px] rounded-md m-1',
+        TicTacToe: 'bg-white h-24 w-24 xl:h-32 xl:w-32 rounded-md m-1',
         Connect4: 'bg-white h-[75px] w-[75px] rounded-full'
     }
     const PLAYER_COLOR = {
@@ -38,11 +38,11 @@ function Cell({ cell, handleClick, game }) {
 
 
     return (
-        <div className={`${CELL_STYLE[game]}`}>
-            <button className={`${PLAYER_COLOR[game](cell)} rounded-md w-full h-full`} type="button" onClick={handleClick}>
-                <text className={`${CELL_VALUE_COLOR[game](cell)}`}>{CELL_VALUE[game]}</text>
-            </button>
-        </div >
+        <div className={`${CELL_STYLE[game]} ${PLAYER_COLOR[game](cell)}`} onClick={handleClick}>
+            {/* <button className={`${PLAYER_COLOR[game](cell)} rounded-md w-full h-full`} type="button" onClick={handleClick}> */}
+            <text className={`${CELL_VALUE_COLOR[game](cell)}`}>{CELL_VALUE[game]}</text>
+            {/* </button> */}
+        </div>
     )
 }
 

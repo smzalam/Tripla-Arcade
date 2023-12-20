@@ -1,12 +1,12 @@
 import IMAGES from "../../assets/images/images"
 
-const ExitButton = ({ display, stopWatching}) => {
+const ExitButton = ({ display, deactivateGame}) => {
     return (
         <>
-            <text className={`${display} place-self-center justify-self-center ml-6 text-3xl text-yellow-500`}>Back</text>
+            <text className={`${display} place-self-center justify-self-center ml-6 text-3xl text-text`}>Back</text>
             <button
-                className={`hover:bg-lavender hover:rounded-md  active:bg-black ${display} justify-self-start self-center`}
-                onClick={stopWatching}
+                className={`hover:bg-secondary ml-3 hover:rounded-md  active:bg-black ${display} justify-self-start self-center`}
+                onClick={deactivateGame}
             >
                 <img
                     src={IMAGES.backIcon}
