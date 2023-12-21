@@ -17,6 +17,10 @@ const getInitialGameState = (rows, cols, mapper) => {
     return gameState
 }
 
+const flatten = array => array.reduce((acc, cur) => [...acc, ...cur], [])
+
 export {
     getInitialGameState,
+    newBoard,
+    flatten,
 }
