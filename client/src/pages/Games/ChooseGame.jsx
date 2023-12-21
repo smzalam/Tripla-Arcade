@@ -27,9 +27,8 @@ function ChooseGame() {
     // }, [day])
 
     const { setInGame } = useSettingsContext();
+    const { socket, setRoom } = useGameContext();
     const [mode, setMode] = useState('choose');
-    const [room, setRoom] = useState('');
-    const { socket } = useGameContext();
 
     const games = [
         'QuicQuakQuad',
@@ -65,10 +64,10 @@ function ChooseGame() {
         setInGame(false)
     }
 
-    const deactivateGame = () => {
+    const deactivateGame = (room) => {
+        socket.emit('leaveRoom', room)
         setMode('choose')
         setInGame(false)
-        socket.emit('leaveRoom')
         setRoom('')
     }
 
@@ -99,7 +98,7 @@ function ChooseGame() {
                 <JoinGame joinRoom={joinRoom} chooseGame={chooseGame} />
             }
             {mode === 'play' &&
-                <Game deactivateGame={deactivateGame} room={room} />
+                <Game deactivateGame={deactivateGame} />
             }
             {/* {game && <ActiveSlider game={game} />} */}
             {/* {game && <JoinGame game={game} ></JoinGame>} */}

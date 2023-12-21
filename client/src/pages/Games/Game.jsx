@@ -6,7 +6,7 @@ import MiniKahootGame from '../Games/MiniKahootGame'
 const Game = ({ deactivateGame, room }) => {
 
   const { inGame } = useSettingsContext();
-
+  console.log(room)
   return (
     <>
       {inGame === 'TicTacToe' && <TicTacToeGame deactivateGame={deactivateGame} room={room} />}

@@ -7,27 +7,30 @@ import WaitingScreen from './WaitingScreen'
 import { useGameContext } from '../../context/GameContext';
 import { useSettingsContext } from '../../context/SettingsContext';
 import tttReducer from '../../reducers/tttReducer';
-import { GAME_STATUS_TEXT, NEXT_PLAYER_TEXT, getInitialGameState } from '../../schemas/gameSchemas';
+import { GAME_STATUS_TEXT, NEXT_PLAYER_TEXT } from '../../schemas/gameSchemas';
 
 
-function TicTacToeGame({ deactivateGame, room }) {
-
-    const { socket } = useGameContext();
+function TicTacToeGame({ deactivateGame }) {
+    const { socket, room, gameRoom } = useGameContext();
     const { inGame: game } = useSettingsContext();
     const [gameState, setGameState] = useState({});
     // const [players, setPlayers] = useState([]);
     // const initialState = getInitialGameState(3, 3, () => "", players)
     // const [state, dispatch] = useReducer(tttReducer, initialState);
     // console.log(player)
-
+    console.log(gameRoom.current)
     useEffect(() => {
         socket.on('roomFull', (initialGameState) => {
-            console.log(initialGameState)
-            socket.emit('gameStart', initialGameState)
+            console.log(gameRoom)
+            socket.emit('gameStart', gameRoom.current)
+        })
+
+        socket.on('gameDisconnect', gameState => {
+            setGameState(gameState);
+            deactivateGame();
         })
 
         socket.on('gameStartState', (initialGameState) => {
-            console.log(initialGameState)
             setGameState(initialGameState)
         })
 
@@ -36,6 +39,10 @@ function TicTacToeGame({ deactivateGame, room }) {
         })
 
         socket.on('playerLeave', (updatedGameState) => {
+            setGameState(updatedGameState);
+        })
+
+        socket.on('gameEnd', (updatedGameState) => {
             setGameState(updatedGameState);
         })
 
@@ -56,16 +63,16 @@ function TicTacToeGame({ deactivateGame, room }) {
                 console.log(initialGameState)
                 socket.emit('gameStart', initialGameState)
             })
-    
+
             socket.off('gameStartState', (initialGameState) => {
                 console.log(initialGameState)
                 setGameState(initialGameState)
             })
-    
+
             socket.off('playerJoin', (updatedGameState) => {
                 setGameState(updatedGameState);
             })
-    
+
             socket.off('playerLeave', (updatedGameState) => {
                 setGameState(updatedGameState);
             })
@@ -128,11 +135,11 @@ function TicTacToeGame({ deactivateGame, room }) {
 
     return (
         <>
-            {!playersJoined && <WaitingScreen deactivateGame={() => {deactivateGame()}} room={room} />}
+            {!playersJoined && <WaitingScreen deactivateGame={() => { deactivateGame(gameRoom.current) }} room={room} />}
             {playersJoined && <div className='bg-background text-9xl text-text'>
                 <div className='flex flex-col justify-center h-full gap-10'>
                     <div className='absolute xl:top-[5%] flex flex-row'>
-                        <ExitButton display={(status !== 'finish') ? 'grid' : 'grid'} deactivateGame={() => {deactivateGame()}} />
+                        <ExitButton display={(status !== 'finish') ? 'grid' : 'grid'} deactivateGame={() => { deactivateGame(gameRoom.current) }} />
                     </div>
                     <div className='flex flex-row justify-center'>
                         <div className='text-3xl text-text font-bold'>

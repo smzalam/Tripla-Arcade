@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import IMAGES from '../../assets/images/images';
 
 function JoinGame({ joinRoom, chooseGame }) {
 
     const [room, setRoom] = useState('');
+    const gameRoom = useRef('')
+
+    useEffect(() => {
+        gameRoom.current = room
+    }, [room])
 
     return (
         <>
@@ -22,7 +27,7 @@ function JoinGame({ joinRoom, chooseGame }) {
                         }
                         className="bg-white rounded-lg  p-3 w-1/2 h-1/4" />
                     <button
-                        onClick={() => { joinRoom(room) }}
+                        onClick={() => { joinRoom(gameRoom.current) }}
                         className="bg-yellow-500 hover:bg-primary hover:text-text active:bg-black active:text-text rounded-lg w-1/4 h-1/4 text-2xl">
                         Join Game
                     </button>
