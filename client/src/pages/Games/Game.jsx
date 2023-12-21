@@ -3,13 +3,12 @@ import TicTacToeGame from '../Games/TicTacToeGame'
 import Connect4Game from '../Games/Connect4Game'
 import MiniKahootGame from '../Games/MiniKahootGame'
 
-const Game = ({ deactivateGame, room }) => {
+const Game = ({ deactivateGame }) => {
 
   const { inGame } = useSettingsContext();
-  console.log(room)
   return (
     <>
-      {inGame === 'TicTacToe' && <TicTacToeGame deactivateGame={deactivateGame} room={room} />}
+      {inGame === 'TicTacToe' && <TicTacToeGame deactivateGame={deactivateGame} />}
       {inGame === 'QuicQuakQuad' && <Connect4Game />}
       {inGame === 'TypeRacer' && <MiniKahootGame />}
     </>
