@@ -6,7 +6,6 @@ function Board({ board, handleClick, game }) {
     // const [board, setBoard] = useState()
     // const length = board.length;
     // const width = board[0].length;
-
     let style = "";
 
     if (game === 'TicTacToe') {

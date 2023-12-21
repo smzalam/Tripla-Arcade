@@ -26,7 +26,7 @@ function Cell({ cell, handleClick, game }) {
     }
     const CELL_VALUE_COLOR = {
         TicTacToe: cell => {
-            return cell === 'X' ? 'text-3xl text-white font-bold' : 'text-3xl text-white font-bold'
+            return cell === 'X' ? 'text-4xl text-text font-bold' : 'text-4xl text-text font-bold'
         },
         Connect4: cell => {
             if (cell === 'X') {
@@ -38,7 +38,7 @@ function Cell({ cell, handleClick, game }) {
 
 
     return (
-        <div className={`${CELL_STYLE[game]} ${PLAYER_COLOR[game](cell)}`} onClick={handleClick}>
+        <div className={`${CELL_STYLE[game]} ${PLAYER_COLOR[game](cell)} flex place-items-center justify-center`} onClick={handleClick}>
             {/* <button className={`${PLAYER_COLOR[game](cell)} rounded-md w-full h-full`} type="button" onClick={handleClick}> */}
             <text className={`${CELL_VALUE_COLOR[game](cell)}`}>{CELL_VALUE[game]}</text>
             {/* </button> */}
