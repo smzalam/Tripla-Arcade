@@ -42,7 +42,7 @@ const Carousel = ({ children }) => {
             console.log('no')
         }
     })
-    const [active, setActive] = useState(2);
+    const [active, setActive] = useState(1);
     const count = React.Children.count(children);
     const MAX_VISIBILITY = 2;
     return (

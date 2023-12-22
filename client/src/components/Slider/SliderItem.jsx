@@ -6,12 +6,18 @@ import PlayButton from './Buttons/PlayButton';
 import JoinButton from './Buttons/JoinButton';
 import { motion } from 'framer-motion';
 
-const SliderItem = ({activateGame, activateJoin, game}) => {
+const SliderItem = ({ activateGame, activateJoin, game }) => {
     const [detailsModal, setDetailsModal] = useState(false);
     const [powerUpModal, setPowerUpModal] = useState(false);
 
     return (
-        <div className='h-4/5 w-5/6 rounded-lg flex flex-col justify-evenly bg-gradient-to-r from-primary to-secondary'>
+        <motion.div
+            initial={{ rotate: '180deg' }}
+            animate={{ rotate: 0 }}
+            transition={{ duration: 0.5 }}
+            whileHover={{scale: 1.1, transition: {duration: 0.2}}}
+            className='h-4/5 w-5/6 rounded-lg flex flex-col justify-evenly bg-gradient-to-r from-primary to-secondary'
+        >
             <div className='py-3 px-5 text-6xl text-text h-full w-full basis-3/4 flex items-end'>
                 {game}
             </div>
@@ -35,7 +41,7 @@ const SliderItem = ({activateGame, activateJoin, game}) => {
                     <JoinButton activateJoin={activateJoin} game={game} />
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

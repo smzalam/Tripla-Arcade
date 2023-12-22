@@ -33,8 +33,8 @@ function ChooseGame() {
 
     const games = [
         'QuicQuakQuad',
-        'TypeRacer',
         'TicTacToe',
+        'TypeRacer',
     ]
 
     const activateGame = (game) => {
