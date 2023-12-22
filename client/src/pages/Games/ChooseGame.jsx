@@ -7,6 +7,7 @@ import { useGameContext } from '../../context/GameContext';
 import Game from './Game';
 import { useSettingsContext } from '../../context/SettingsContext';
 import { nanoid } from 'nanoid';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function ChooseGame() {
 
@@ -38,7 +39,7 @@ function ChooseGame() {
 
     const activateGame = (game) => {
         setInGame(game)
-        
+
         const room = nanoid();
         setRoom(room);
         setMode('play')
@@ -54,7 +55,7 @@ function ChooseGame() {
     const joinRoom = (room) => {
         setRoom(room);
         setMode('play')
-        
+
         socket.emit('joinRoom', room)
     }
 
@@ -81,25 +82,29 @@ function ChooseGame() {
     // }, [])
 
     return (
-        <>
-            {mode === 'choose' &&
-                <Carousel>
-                    {
-                        games.map(game => (
-                            <SliderItem key={game} activateGame={activateGame} activateJoin={activateJoin} game={game} />
-                        ))
-                    }
-                </Carousel>
-            }
-            {/* {mode === 'waiting' &&
-                <WaitingScreen setMode={setMode} />
-            } */}
-            {mode === 'join' &&
-                <JoinGame joinRoom={joinRoom} chooseGame={chooseGame} />
-            }
-            {mode === 'play' &&
-                <Game deactivateGame={deactivateGame} />
-            }
+        <motion.div
+            initial={{ x: "100vw" }}
+            animate={{ x: 0 }}
+            exit={{ y: '-100vh'}}
+            transition={{ duration: 0.5, ease: 'easeOut', type: 'spring', stiffness: 45 }}
+            className='grid overflow-hidden'>
+            <AnimatePresence>
+                {mode === 'choose' &&
+                    <Carousel>
+                        {
+                            games.map(game => (
+                                <SliderItem key={game} activateGame={activateGame} activateJoin={activateJoin} game={game} />
+                            ))
+                        }
+                    </Carousel>
+                }
+                {mode === 'join' &&
+                    <JoinGame joinRoom={joinRoom} chooseGame={chooseGame} />
+                }
+                {mode === 'play' &&
+                    <Game deactivateGame={deactivateGame} />
+                }
+            </AnimatePresence>
             {/* {game && <ActiveSlider game={game} />} */}
             {/* {game && <JoinGame game={game} ></JoinGame>} */}
             {/* {!game &&
@@ -172,7 +177,7 @@ function ChooseGame() {
                     </div>
                 </div >
             } */}
-        </>
+        </motion.div>
     )
 }
 

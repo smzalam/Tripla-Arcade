@@ -7,7 +7,7 @@ import Dashboard from "./pages/Dashboard";
 function App() {
 
   return (
-    <div className="h-screen w-screen grid grid-cols-1 grid-rows-1">
+    <div className="h-screen w-screen grid grid-cols-1 grid-rows-1 overflow-hidden">
       <SettingsProvider>
         <NavigationProvider>
           <GameProvider>

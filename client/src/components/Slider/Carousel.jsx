@@ -46,7 +46,7 @@ const Carousel = ({ children }) => {
     const count = React.Children.count(children);
     const MAX_VISIBILITY = 2;
     return (
-        <div className='grid overflow-hidden'>
+        <>
             <div className='carousel'>
                 {React.Children.map(children, (child, i) => (
                     <div className='card-container' style={{
@@ -111,7 +111,7 @@ const Carousel = ({ children }) => {
             >
                 Next
             </button> */}
-        </div>
+        </>
     )
 }
 

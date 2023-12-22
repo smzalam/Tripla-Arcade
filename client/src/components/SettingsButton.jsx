@@ -1,12 +1,17 @@
 import { useState } from "react";
 import SettingsModal from "./SettingsModal";
 import classNames from "classnames";
+import { motion } from "framer-motion";
 
 const SettingsButton = ({ content, Icon }) => {
     const [modal, setModal] = useState(false);
 
     return (
-        <div className="overflow-visible">
+        <motion.div
+            initial={{ y: '-55vh' }}
+            animate={{ y: 0 }}
+            transition={{ delay: 1.2, duration: 1, type: 'spring', stiffness: 70 }}
+            className="h-full overflow-hidden">
             <SettingsModal modal={modal} setModal={setModal} />
             <button
                 onClick={() => { setModal(true) }}
@@ -25,7 +30,7 @@ const SettingsButton = ({ content, Icon }) => {
                     {content}
                 </span>
             </button>
-        </div>
+        </motion.div>
     )
 }
 

@@ -4,6 +4,7 @@ import PowerUpModal from '../PowerUpModal'
 import ModalButtons from './Buttons/ModalButtons';
 import PlayButton from './Buttons/PlayButton';
 import JoinButton from './Buttons/JoinButton';
+import { motion } from 'framer-motion';
 
 const SliderItem = ({activateGame, activateJoin, game}) => {
     const [detailsModal, setDetailsModal] = useState(false);

@@ -1,23 +1,23 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
+
 import Board from '../../components/Board';
 import ExitButton from '../../components/Buttons/ExitButton';
 import ResetButton from '../../components/Buttons/ResetButton';
-import WaitingScreen from './WaitingScreen'
+
 import { useGameContext } from '../../context/GameContext';
 import { useSettingsContext } from '../../context/SettingsContext';
+
 import { GAME_STATUS_TEXT, NEXT_PLAYER_TEXT } from '../../schemas/gameSchemas';
+
+import WaitingScreen from './WaitingScreen';
 
 
 function TicTacToeGame({ deactivateGame }) {
     const { socket, room, gameRoom } = useGameContext();
     const { inGame: game } = useSettingsContext();
     const [gameState, setGameState] = useState({});
-    // const [players, setPlayers] = useState([]);
-    // const initialState = getInitialGameState(3, 3, () => "", players)
-    // const [state, dispatch] = useReducer(tttReducer, initialState);
-    // console.log(player)
-    console.log(gameRoom.current)
+
     useEffect(() => {
         socket.on('roomFull', (initialGameState) => {
             socket.emit('gameStart', gameRoom.current)
@@ -87,8 +87,8 @@ function TicTacToeGame({ deactivateGame }) {
             })
         }
     })
+
     const { playersJoined, board, currentPlayer, status } = gameState
-    console.log('BOARD: ', board)
 
     const gameMove = (x, y) => {
         socket.emit('gameMove', gameRoom.current, {x, y, game})

@@ -7,7 +7,7 @@ const SettingsProvider = ({ children }) => {
     const [isTimer, setIsTimer] = useState(false);
     const [isWalls, setIsWalls] = useState(false);
     const [isPowerUps, setIsPowerUps] = useState(false);
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(false);
     const [inGame, setInGame] = useState(false);
 
     useEffect(() => {

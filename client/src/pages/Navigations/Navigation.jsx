@@ -5,26 +5,26 @@ import Profile from '../Profile'
 import classNames from 'classnames'
 import JoinGame from '../Games/JoinGame'
 import WaitingScreen from '../Games/WaitingScreen'
+import { motion, AnimatePresence } from 'framer-motion';
 
 function Navigation({ isActive }) {
 
-
     return (
-        <div
+        <motion.div
             className=
-            {   
+            {
                 classNames(
                     { 'hidden': isActive === '/' },
                     { 'grid': isActive !== '/' }
                 )
             }
         >
-            {isActive === "/guide" && <Guide />}
-            {isActive === "/choose_games" && <ChooseGame />}
-            {isActive == "/profile" && <Profile />}
-            {isActive == "/waiting" && <WaitingScreen />}
-            {isActive == "/join" && <JoinGame />}
-        </div>
+            <AnimatePresence initial={false} mode={'wait'}>
+                {isActive === "/guide" && <Guide key={'guide'} />}
+                {isActive === "/choose_games" && <ChooseGame key={'chooseGame'} />}
+                {isActive == "/profile" && <Profile key={'profile'} />}
+            </AnimatePresence>
+        </motion.div>
     )
 }
 

@@ -15,7 +15,7 @@ const SettingsModal = ({ modal, setModal }) => {
                 <SettingsToggleButton settingName={'Timer'} settingToggle={timerSetting} margin_top={'mt-10'} />
                 <SettingsToggleButton settingName={'Walls'} settingToggle={wallsSetting} />
                 <SettingsToggleButton settingName={'Power Ups'} settingToggle={powerUpsSetting} margin_bottom={'mb-10'}/>
-                <SettingsToggleButton settingName={'Dark Mode'} settingToggle={darkModeSetting} margin_bottom={'mb-10'}/>
+                <SettingsToggleButton settingName={'Light Mode'} settingToggle={darkModeSetting} margin_bottom={'mb-10'}/>
             </div>
         </Modal>
     )
