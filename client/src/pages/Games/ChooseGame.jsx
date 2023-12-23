@@ -72,25 +72,17 @@ function ChooseGame() {
         setRoom('')
     }
 
-    // useEffect(() => {
-    //     socket.on('roomFull', () => {
-    //         setMode('play')
-    //     })
-    //     socket.on('fullRoomMessage', message => {
-    //         console.log(message.message)
-    //     })
-    // }, [])
-
     return (
         <motion.div
             initial={{ x: "100vw" }}
             animate={{ x: 0 }}
             exit={{ y: '-100vh'}}
             transition={{ duration: 0.5, ease: 'easeOut', type: 'spring', stiffness: 45 }}
-            className='grid overflow-hidden'>
-            <AnimatePresence>
+            className='grid overflow-hidden'
+        >
+            <AnimatePresence mode={'wait'}>
                 {mode === 'choose' &&
-                    <Carousel>
+                    <Carousel key="carousel">
                         {
                             games.map(game => (
                                 <SliderItem key={game} activateGame={activateGame} activateJoin={activateJoin} game={game} />
@@ -99,10 +91,10 @@ function ChooseGame() {
                     </Carousel>
                 }
                 {mode === 'join' &&
-                    <JoinGame joinRoom={joinRoom} chooseGame={chooseGame} />
+                    <JoinGame key="joinGame" joinRoom={joinRoom} chooseGame={chooseGame} />
                 }
                 {mode === 'play' &&
-                    <Game deactivateGame={deactivateGame} />
+                    <Game key="game" deactivateGame={deactivateGame} />
                 }
             </AnimatePresence>
             {/* {game && <ActiveSlider game={game} />} */}

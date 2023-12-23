@@ -4,24 +4,34 @@ import Navigation from "./Navigations/Navigation"
 import NavMenu from "../components/Navigation/NavMenu"
 import { useNavigationContext } from "../context/NavigationContext"
 import { LayoutGroup, motion } from "framer-motion";
+import { useSettingsContext } from "../context/SettingsContext"
 
 const Dashboard = () => {
   const { isActive, setIsActive } = useNavigationContext();
+  const { inGame } = useSettingsContext();
 
   return (
-    <div
+    <motion.div
+      layout
       className={
         classNames(
-          "bg-background w-full grid grid-cols-[0.2fr_2fr]",
+          "bg-background w-full grid",
+          {
+            'grid-cols-[0.2fr_2fr]': !inGame
+          },
+          {
+            'grid': inGame
+          }
+
         )
       }
     >
       <LayoutGroup>
         <motion.div
-          layout
+          layout='position'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2, ease: 'easeInOut' , layout: { type: 'spring', duration: 0.5, stiffness: 45 } }}
+          transition={{ duration: 2, ease: 'easeInOut', layout: { type: 'spring', duration: 0.5, stiffness: 45 } }}
           className=
           {
             classNames(
@@ -32,6 +42,9 @@ const Dashboard = () => {
               {
                 'ml-10 flex-col h-screen': isActive !== '/'
               },
+              {
+                'hidden': inGame
+              }
             )
           }
         >
@@ -41,7 +54,7 @@ const Dashboard = () => {
         </motion.div>
         <Navigation isActive={isActive} />
       </LayoutGroup>
-    </div>
+    </motion.div>
   )
 }
 

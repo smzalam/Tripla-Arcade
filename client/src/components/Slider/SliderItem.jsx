@@ -14,8 +14,8 @@ const SliderItem = ({ activateGame, activateJoin, game }) => {
         <motion.div
             initial={{ rotate: '180deg' }}
             animate={{ rotate: 0 }}
-            transition={{ duration: 0.5 }}
-            whileHover={{scale: 1.1, transition: {duration: 0.2}}}
+            transition={{ duration: 0.25 }}
+            whileHover={{scale: 1.1, transition: {duration: 0.2, type: "spring", stiffness: 100, damping: 5}}}
             className='h-4/5 w-5/6 rounded-lg flex flex-col justify-evenly bg-gradient-to-r from-primary to-secondary'
         >
             <div className='py-3 px-5 text-6xl text-text h-full w-full basis-3/4 flex items-end'>

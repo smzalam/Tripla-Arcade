@@ -5,16 +5,12 @@ import SettingsButton from '../SettingsButton'
 import { Cog8ToothIcon } from '@heroicons/react/24/outline'
 import IMAGES from '../../assets/images/images'
 import classNames from 'classnames'
-import { useSettingsContext } from '../../context/SettingsContext'
 import { motion } from 'framer-motion';
 
 function NavMenu({ isActive, setIsActive }) {
 
-    const { inGame } = useSettingsContext();
-
     return (
         <motion.div
-            // layout
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ 
@@ -24,13 +20,7 @@ function NavMenu({ isActive, setIsActive }) {
             }}
             className={
                 classNames(
-                    `font-body flex-row flex-initial transition justify-center p-4`,
-                    {
-                        'flex': !inGame
-                    },
-                    {
-                        'hidden': inGame
-                    },
+                    `font-body flex flex-row flex-initial transition justify-center p-4`,
                     {
                         'flex-row': isActive === '/'
                     },

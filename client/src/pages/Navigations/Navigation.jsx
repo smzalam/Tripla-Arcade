@@ -3,14 +3,13 @@ import Guide from '../Guide'
 import ChooseGame from '../Games/ChooseGame'
 import Profile from '../Profile'
 import classNames from 'classnames'
-import JoinGame from '../Games/JoinGame'
-import WaitingScreen from '../Games/WaitingScreen'
 import { motion, AnimatePresence } from 'framer-motion';
 
 function Navigation({ isActive }) {
 
     return (
         <motion.div
+            layout
             className=
             {
                 classNames(
@@ -19,7 +18,7 @@ function Navigation({ isActive }) {
                 )
             }
         >
-            <AnimatePresence initial={false} mode={'wait'}>
+            <AnimatePresence>
                 {isActive === "/guide" && <Guide key={'guide'} />}
                 {isActive === "/choose_games" && <ChooseGame key={'chooseGame'} />}
                 {isActive == "/profile" && <Profile key={'profile'} />}
