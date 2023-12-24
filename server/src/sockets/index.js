@@ -11,7 +11,7 @@ const sessionStore = new InMemorySessionStore();
 const createSocket = (app) => {
     const io = new Server(app, {
         cors: {
-            origin: ["http://localhost:5173", "https://admin.socket.io"],
+            origin: ["https://tripla-arcade-frontend.onrender.com", "http://localhost:5173", "https://admin.socket.io"],
             credentials: true,
         }
     });
