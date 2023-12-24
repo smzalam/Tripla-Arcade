@@ -38,9 +38,10 @@ function TicTacToeGame({ deactivateGame }) {
         })
 
         socket.on('playerLeave', (updatedGameState) => {
+            console.log('PLAYER LEAVE GAME STATE CHECK THIS FOR DISCONNECT : ', updatedGameState);
             setGameState(updatedGameState);
         })
-
+        
         socket.on('gameEnd', (updatedGameState) => {
             setGameState(updatedGameState);
         })
@@ -51,6 +52,11 @@ function TicTacToeGame({ deactivateGame }) {
 
         socket.on('resetGameBoard', (updatedGameState) => {
             setGameState(updatedGameState);
+        })
+
+        socket.on('socketDisconnect', () => {
+            console.log('SOCKET DISCONNECT DONE HERE!!!!!!!!!!!!!!!!!!!!!!!!!')
+            socket.emit('playerDisconnect', gameRoom.current)
         })
 
         return () => {
