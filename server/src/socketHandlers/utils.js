@@ -45,6 +45,22 @@ const updatePlayers = async (server, gameState) => {
     return gameState;
 }
 
+const disconnectPlayer = async (server, gameState) => {
+    console.log('in disconnectPlayer')
+    console.log('GAME STATE: ', gameState);
+    // const playerIds = await getRoomSockets(server, gameState.room)
+    // console.log('PlayerIDs: ', playerIds)
+    const remainingPlayers = gameState.players.filter((player) => {
+        if (player !== server.socket.userID) {
+            return player
+        }
+    })
+    gameState.players = remainingPlayers
+    gameState.playersJoined = gameState.players.length === 2 ? true : false
+    console.log('GAME STATE: ', gameState);
+    return gameState;
+}
+
 const addPlayer = async (server, gameState) => {
     console.log('in addPlayer')
     console.log('GAME STATE: ', gameState);
@@ -65,5 +81,6 @@ export {
     getClientsInRoom,
     getRoomSockets,
     updatePlayers,
+    disconnectPlayer,
     addPlayer
 }

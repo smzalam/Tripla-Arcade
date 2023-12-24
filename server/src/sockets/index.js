@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import registerConnectionSockets from './connection.js'
 import registerGameEventsSockets from './gameEvents.js'
 import { InMemorySessionStore } from './sessionStore.js';
+import { getSocketRooms } from './utils.js'
 
 const randomId = () => crypto.randomBytes(8).toString("hex");
 const sessionStore = new InMemorySessionStore();
@@ -57,10 +58,12 @@ const createSocket = (app) => {
                 });
             }
         })
+
         const server = {
             socket,
             io,
-            games: {}
+            games: {},
+            sessionStore
         };
         registerConnectionSockets(server);
         registerGameEventsSockets(server);
