@@ -123,9 +123,9 @@ function TicTacToeGame({ deactivateGame }) {
                             <motion.div
                                 drag
                                 dragConstraints={constraintsRef}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.5, duration: 0.5 }}
+                                // initial={{ opacity: 0 }}
+                                // animate={{ opacity: 1 }}
+                                // transition={{ delay: 0.5, duration: 0.5 }}
                                 className='flex flex-row justify-center text-3xl text-text font-bold overflow-hidden'
                             >
                                 <div>

@@ -3,7 +3,7 @@ import IMAGES from "../../assets/images/images"
 const ExitButton = ({ display, deactivateGame }) => {
     let styles = ''
     let hoverStyles = ''
-    let handler = () => { }
+    let handler = () => {}
 
     if (display === 'grey') {
         styles = 'grid place-self-center justify-self-center ml-6 text-3xl text-gray-400'

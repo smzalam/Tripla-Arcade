@@ -53,6 +53,8 @@ function Cell({ cell, handleClick, game }) {
         }
     }
 
+
+
     console.log(game)
     console.log(CELL_STYLE[game]);
     console.log(PLAYER_COLOR[game](cell));
