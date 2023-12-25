@@ -1,7 +1,7 @@
 // eslint-disable-next-line react/prop-types
-import Guide from '../Guide'
-import ChooseGame from '../Games/ChooseGame'
-import Profile from '../Profile'
+import Guide from '../pages/Guide'
+import ChooseGame from '../pages/ChooseGame'
+import Profile from '../pages/Profile'
 import classNames from 'classnames'
 import { motion, AnimatePresence } from 'framer-motion';
 

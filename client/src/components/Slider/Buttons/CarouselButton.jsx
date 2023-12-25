@@ -1,5 +1,5 @@
 
-const CarouselButton = (handler, Icon) => {
+const CarouselButton = ({ handler, Icon }) => {
     return (
         <button
             className='bg-secondary rounded-lg px-12 py-2'

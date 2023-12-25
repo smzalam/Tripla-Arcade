@@ -1,7 +1,5 @@
 import { useSettingsContext } from '../context/SettingsContext';
 import TicTacToeGame from '../pages/Games/TicTacToeGame'
-import Connect4Game from '../pages/Games/Connect4Game'
-import MiniKahootGame from '../pages/Games/MiniKahootGame'
 import { motion } from 'framer-motion';
 
 const Game = ({ deactivateGame }) => {
@@ -15,9 +13,9 @@ const Game = ({ deactivateGame }) => {
       transition={{ duration: 0.5 }}
       className='bg-secondary text-text'
     >
-      {inGame === 'TicTacToe' && <TicTacToeGame key={'TicTacToeGame'} deactivateGame={deactivateGame} />}
-      {inGame === 'QuicQuakQuad' && <Connect4Game key={'Connect4Game'} />}
-      {inGame === 'TypeRacer' && <MiniKahootGame key={'MiniKahootGame'} />}
+      {inGame === 'TicTacToe' && <TicTacToeGame key={inGame} deactivateGame={deactivateGame} />}
+      {inGame === 'QuicQuakQuad' && <TicTacToeGame key={inGame} deactivateGame={deactivateGame} />}
+      {inGame === 'TypeRacer' && <TicTacToeGame key={inGame} deactivateGame={deactivateGame} />}
     </motion.div>
     // <div className='bg-secondary text-black'>
     //   <WaitingScreen deactivateGame={deactivateGame} />

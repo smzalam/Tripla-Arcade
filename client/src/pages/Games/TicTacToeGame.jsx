@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef, useState } from 'react';
 
-import Board from '../../components/Board';
-import ExitButton from '../../components/Buttons/ExitButton';
-import ResetButton from '../../components/Buttons/ResetButton';
+import Board from '../../components/Games/GameBoard/Board';
+import ExitButton from '../../components/Games/Buttons/ExitButton';
+import ResetButton from '../../components/Games/Buttons/ResetButton';
 
 import { useGameContext } from '../../context/GameContext';
 import { useSettingsContext } from '../../context/SettingsContext';
 
-import { GAME_STATUS_TEXT, NEXT_PLAYER_TEXT } from '../../schemas/gameSchemas';
+import { GAME_STATUS_TEXT, NEXT_PLAYER_TEXT } from '../../utils/gameUtils';
 
 import WaitingScreen from '../WaitingScreen';
 import { motion, AnimatePresence } from 'framer-motion';

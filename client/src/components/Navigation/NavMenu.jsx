@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { NavItems } from './NavItems'
-import NavButtons from '../Buttons/NavButtons'
-import SettingsButton from '../SettingsButton'
+import NavButtons from './Buttons/NavButtons'
+import SettingsButton from './Buttons/SettingsButton'
 import { Cog8ToothIcon } from '@heroicons/react/24/outline'
 import IMAGES from '../../assets/images/images'
 import classNames from 'classnames'

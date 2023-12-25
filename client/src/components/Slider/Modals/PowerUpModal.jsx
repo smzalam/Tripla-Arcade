@@ -2,7 +2,7 @@
 
 import { useSettingsContext } from "../../../context/SettingsContext";
 import Modal from "../../Modal"
-import SettingsToggleButton from "./SettingsToggleButton";
+import SettingsToggleButton from "../../SettingsModal/Buttons/SettingsToggleButton";
 
 const SettingsModal = ({ modal, setModal }) => {
     const { timerSetting, wallsSetting, powerUpsSetting } = useSettingsContext();

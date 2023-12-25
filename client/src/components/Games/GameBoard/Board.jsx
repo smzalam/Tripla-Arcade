@@ -7,13 +7,13 @@ function Board({ board, handleClick, game }) {
     // const [board, setBoard] = useState()
     // const length = board.length;
     // const width = board[0].length;
-    let style = "";
+    // let style = "";
 
-    if (game === 'TicTacToe') {
-        style = 'bg-blend-overlay grid grid-rows-3 grid-cols-3 rounded-lg p-3'
-    } else {
-        style = 'bg-lavender grid grid-rows-6 grid-cols-7 gap-2 border-8 border-black'
-    }
+    // if (game === 'TicTacToe') {
+    let style = 'bg-blend-overlay grid grid-rows-3 grid-cols-3 rounded-lg p-3'
+    // } else {
+        // style = 'bg-lavender grid grid-rows-6 grid-cols-7 gap-2 border-8 border-black'
+    // }
 
     const boardVariant = {
         hidden: {

@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import Home from "./Home"
-import Navigation from "./Navigations/Navigation"
-import NavMenu from "../components/Navigation/NavMenu"
+import Navigation from "../navigation/RouteNavigation"
+import NavMenu from '../components/Navigation/NavMenu'
 import { useNavigationContext } from "../context/NavigationContext"
 import { LayoutGroup, motion } from "framer-motion";
 import { useSettingsContext } from "../context/SettingsContext"

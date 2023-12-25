@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import DetailsModal from '../DetailsModal'
-import PowerUpModal from '../PowerUpModal'
+import DetailsModal from './Modals/DetailsModal'
+import PowerUpModal from './Modals/PowerUpModal'
 import ModalButtons from './Buttons/ModalButtons';
 import PlayButton from './Buttons/PlayButton';
 import JoinButton from './Buttons/JoinButton';

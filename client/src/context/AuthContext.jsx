@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState } from "react";
 import Cookies from "universal-cookie";
-import { connectCurrentUser, disconnectCurrentUser } from "../lib/steam/api";
+// import { connectCurrentUser, disconnectCurrentUser } from "../lib/steam/api";
 
 const AuthContext = createContext();
 
@@ -11,34 +11,34 @@ const AuthProvider = ({ children }) => {
     const cookies = new Cookies();
 
     const login = () => {
-        try {
-            const token = cookies.get("token");
-            const user = {
-                id: cookies.get("userID"),
-                name: cookies.get("username"),
-                firstName: cookies.get('firstName'),
-                lastName: cookies.get('lastName'),
-                hashedPassword: cookies.get("hashedPassword")
-            }
-            connectCurrentUser(user, token).then((result) => {
-                if (result) {
-                    setIsAuth(true);
-                }
-            });
-        } catch (error) {
-            console.log(error);
-            return false;
-        }
+        // try {
+        //     const token = cookies.get("token");
+        //     const user = {
+        //         id: cookies.get("userID"),
+        //         name: cookies.get("username"),
+        //         firstName: cookies.get('firstName'),
+        //         lastName: cookies.get('lastName'),
+        //         hashedPassword: cookies.get("hashedPassword")
+        //     }
+        //     connectCurrentUser(user, token).then((result) => {
+        //         if (result) {
+        //             setIsAuth(true);
+        //         }
+        //     });
+        // } catch (error) {
+        //     console.log(error);
+        //     return false;
+        // }
     }
     const logout = () => {
-        cookies.remove("token");
-        cookies.remove("userID");
-        cookies.remove("firstName");
-        cookies.remove("lastName");
-        cookies.remove("hashedPassword");
-        cookies.remove("channelName");
-        cookies.remove("username");
-        disconnectCurrentUser().then(() => { setIsAuth(false) });
+        // cookies.remove("token");
+        // cookies.remove("userID");
+        // cookies.remove("firstName");
+        // cookies.remove("lastName");
+        // cookies.remove("hashedPassword");
+        // cookies.remove("channelName");
+        // cookies.remove("username");
+        // disconnectCurrentUser().then(() => { setIsAuth(false) });
     }
 
     const value = {
