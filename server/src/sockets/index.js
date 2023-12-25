@@ -16,6 +16,7 @@ const createSocket = (app) => {
     const io = new Server(app, {
         cors: {
             origin: (origin, callback) => {
+                console.log(origin)
                 allowedOrigins.includes(origin) ? callback(null, true) : callback(new Error('Not allowed by CORS'))
             },
             credentials: true,
