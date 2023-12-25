@@ -10,7 +10,8 @@ import 'dotenv/config'
 
 const randomId = () => crypto.randomBytes(8).toString("hex");
 const sessionStore = new InMemorySessionStore();
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',').map(origin => origin)
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',')
+console.log(allowedOrigins)
 const createSocket = (app) => {
     const io = new Server(app, {
         cors: {
