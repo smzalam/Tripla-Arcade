@@ -5,13 +5,18 @@ import registerConnectionSockets from './connection.js'
 import registerGameEventsSockets from './gameEvents.js'
 import { InMemorySessionStore } from './sessionStore.js';
 import { getSocketRooms } from './utils.js'
+import 'dotenv/config'
+
 
 const randomId = () => crypto.randomBytes(8).toString("hex");
 const sessionStore = new InMemorySessionStore();
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',').map(origin => origin)
 const createSocket = (app) => {
     const io = new Server(app, {
         cors: {
-            origin: ["https://tripla-arcade-frontend.onrender.com", "http://localhost:5173", "https://admin.socket.io"],
+            origin: (origin, callback) => {
+                allowedOrigins.includes(origin) ? callback(null, true) : callback(new Error('Not allowed by CORS'))
+            },
             credentials: true,
         }
     });
