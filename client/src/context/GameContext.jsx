@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { io } from 'socket.io-client';
-const socket = io.connect({ autoConnect: false })
+const socket = io.connect(
+  import.meta.env.MODE === 'development' ? import.meta.env.VITE_DEVHOST : import.meta.env.VITE_PRODHOST,
+  { autoConnect: false }
+)
 const GameContext = createContext();
 
 const GameProvider = ({ children }) => {
