@@ -7,6 +7,8 @@ const gameMove = async (server, room, data) => {
     const gameState = await getGameState(room);
     if (data.game === 'TicTacToe') {
         TicTacToeGameMoveLogic(server, gameState, data);
+    } else {
+        TicTacToeGameMoveLogic(server, gameState, data);
     }
 }
 
@@ -14,6 +16,8 @@ const gameMove = async (server, room, data) => {
 const gameReset = async (server, room, data) => {
     const gameState = await getGameState(room);
     if (data.game === 'TicTacToe') {
+        TicTacToeGameResetLogic(server, gameState);
+    } else {
         TicTacToeGameResetLogic(server, gameState);
     }
 }
