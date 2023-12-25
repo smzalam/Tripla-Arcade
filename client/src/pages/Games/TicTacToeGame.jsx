@@ -10,7 +10,7 @@ import { useSettingsContext } from '../../context/SettingsContext';
 
 import { GAME_STATUS_TEXT, NEXT_PLAYER_TEXT } from '../../schemas/gameSchemas';
 
-import WaitingScreen from './WaitingScreen';
+import WaitingScreen from '../WaitingScreen';
 import { motion, AnimatePresence } from 'framer-motion';
 
 

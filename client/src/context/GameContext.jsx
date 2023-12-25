@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { io } from 'socket.io-client';
-const socket = io.connect("https://tripla-arcade.onrender.com", { autoConnect: false })
+const socket = io.connect({ autoConnect: false })
 const GameContext = createContext();
 
 const GameProvider = ({ children }) => {

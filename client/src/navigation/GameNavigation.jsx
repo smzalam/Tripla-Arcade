@@ -1,7 +1,7 @@
-import { useSettingsContext } from '../../context/SettingsContext';
-import TicTacToeGame from '../Games/TicTacToeGame'
-import Connect4Game from '../Games/Connect4Game'
-import MiniKahootGame from '../Games/MiniKahootGame'
+import { useSettingsContext } from '../context/SettingsContext';
+import TicTacToeGame from '../pages/Games/TicTacToeGame'
+import Connect4Game from '../pages/Games/Connect4Game'
+import MiniKahootGame from '../pages/Games/MiniKahootGame'
 import { motion } from 'framer-motion';
 
 const Game = ({ deactivateGame }) => {

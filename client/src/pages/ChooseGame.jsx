@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import Carousel from '../../components/Slider/Carousel';
-import SliderItem from '../../components/Slider/SliderItem'
+import Carousel from '../components/Slider/Carousel';
+import SliderItem from '../components/Slider/SliderItem'
 import JoinGame from './JoinGame';
-import { useGameContext } from '../../context/GameContext';
-import Game from './Game';
-import { useSettingsContext } from '../../context/SettingsContext';
+import { useGameContext } from '../context/GameContext';
+import Game from '../navigation/GameNavigation';
+import { useSettingsContext } from '../context/SettingsContext';
 import { nanoid } from 'nanoid';
 import { motion, AnimatePresence } from 'framer-motion';
 

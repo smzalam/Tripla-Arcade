@@ -1,7 +1,7 @@
 import { useState } from "react"
-import ReadyButton from './ReadyButton'
+import ReadyButton from './Games/ReadyButton'
 // import { useGameContext } from "../../context/GameContext";
-import IMAGES from "../../assets/images/images";
+import IMAGES from "../assets/images/images";
 import { motion } from 'framer-motion';
 
 const WaitingScreen = ({ deactivateGame, room }) => {

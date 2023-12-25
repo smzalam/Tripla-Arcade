@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef, useState } from 'react';
-import IMAGES from '../../assets/images/images';
+import IMAGES from '../assets/images/images';
 import { motion } from 'framer-motion';
 
 function JoinGame({ joinRoom, chooseGame }) {
