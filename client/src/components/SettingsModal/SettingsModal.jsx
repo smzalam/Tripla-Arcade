@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 
-import { useSettingsContext } from "../context/SettingsContext";
-import Modal from "./Modal"
-import SettingsToggleButton from "./SettingsToggleButton";
+import { useSettingsContext } from "../../context/SettingsContext";
+import Modal from "../Modal"
+import SettingsToggleButton from "./Buttons/SettingsToggleButton";
 
 const SettingsModal = ({ modal, setModal }) => {
     const { timerSetting, wallsSetting, powerUpsSetting, darkModeSetting } = useSettingsContext();

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SettingsModal from "./SettingsModal";
+import SettingsModal from "../../SettingsModal/SettingsModal";
 import classNames from "classnames";
 import { motion } from "framer-motion";
 

@@ -1,6 +1,7 @@
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/react/24/outline'
 import React, { useState } from 'react'
 import { motion } from 'framer-motion';
+import CarouselButton from './Buttons/CarouselButton';
 ``
 
 const Carousel = ({ children }) => {
@@ -30,20 +31,10 @@ const Carousel = ({ children }) => {
             <div className='left-[19%] absolute flex flex-row place-content-center gap-96 xl:gap-[48rem] bottom-10'>
 
                 {active > 0 &&
-                    <button
-                        className='bg-secondary rounded-lg px-12 py-2'
-                        onClick={() => setActive(i => i - 1)}
-                    >
-                        <ChevronDoubleLeftIcon className='text-primary h-12 w-12' />
-                    </button>
+                    <CarouselButton handler={() => setActive(i => i - 1)} Icon={ChevronDoubleLeftIcon} />
                 }
                 {active < count - 1 &&
-                    <button
-                        className='bg-secondary rounded-lg px-12 py-2'
-                        onClick={() => setActive(i => i + 1)}
-                    >
-                        <ChevronDoubleRightIcon className='text-primary h-12 w-12' />
-                    </button>
+                    <CarouselButton handler={() => setActive(i => i + 1)} Icon={ChevronDoubleRightIcon} />
                 }
             </div>
             {/* <SliderItem /> */}

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 // import { useSettingsContext } from "../context/SettingsContext";
-import Modal from "./Modal"
+import Modal from "../../Modal"
 // import SettingsToggleButton from "./SettingsToggleButton";
 
 const SettingsModal = ({ modal, setModal, game }) => {

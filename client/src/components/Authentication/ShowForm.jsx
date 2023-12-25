@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import SignUp from './SignUp'
-import Login from './Login'
+import SignUp from './Forms/SignUp'
+import Login from './Forms/Login'
 
 function ShowForm({ setModal, showForm, setShowForm }) {
     if (showForm === 'login') {

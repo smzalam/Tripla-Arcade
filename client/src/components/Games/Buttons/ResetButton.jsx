@@ -1,4 +1,4 @@
-import IMAGES from "../../assets/images/images"
+import IMAGES from "../../../assets/images/images"
 
 const ResetButton = ({ reset }) => {
     return (
