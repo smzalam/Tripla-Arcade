@@ -31,7 +31,7 @@ const createGameDescription = async (game) => {
 }
 
 const updateGameDescription = async (game) => {
-    const updatedGame = await updateGame(gameState)
+    const updatedGame = await updateGame(game)
     return updatedGame;
 }
 

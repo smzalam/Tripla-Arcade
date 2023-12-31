@@ -7,6 +7,7 @@ import { createServer } from 'node:http';
 
 import createSocket from "./sockets/index.js";
 import gamesRouter from './routes/games.js'
+import authRouter from './routes/auth.js';
 
 dotenv.config()
 const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',')
@@ -36,5 +37,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/games', gamesRouter)
+app.use('/auth', authRouter)
 
 server.listen(process.env.PORT, () => { console.log(`Server is running on port ${process.env.PORT}.`) })
