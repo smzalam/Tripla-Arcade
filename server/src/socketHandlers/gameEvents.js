@@ -1,6 +1,6 @@
 import {
     getGameState,
-} from '../utils/gameStateUtils.js'
+} from '../controllers/gameStateControllers.js'
 import { TicTacToeGameMoveLogic, TicTacToeGameResetLogic } from '../games/TicTacToe/gameLogic.js';
 
 const gameMove = async (server, room, data) => {

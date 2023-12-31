@@ -1,6 +1,6 @@
 import {
     updateGameStates,
-} from '../../utils/gameStateUtils.js'
+} from '../../controllers/gameStateControllers.js'
 import { newBoard } from '../../utils/boardGenerationUtils.js'
 import { checkForWinttt, checkForDrawttt } from './gameWinCon.js';
 

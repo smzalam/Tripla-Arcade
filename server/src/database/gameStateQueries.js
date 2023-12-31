@@ -1,8 +1,8 @@
-import Game from '../models/Game.js';
+import GameState from '../models/GameState.js';
 
 const createInitialGameState = async (gameState) => {
     console.log('in createInitialGameState')
-    const initialGameState = await Game.create({ ...gameState })
+    const initialGameState = await GameState.create({ ...gameState })
     return initialGameState
 }
 
@@ -16,7 +16,7 @@ const updateGameState = async (updatedGameState) => {
 const findExistingRoom = async (room) => {
     console.log('ROOM: ', room)
     console.log('in findExistingRoom')
-    const existingGameState = await Game.find({room: room})
+    const existingGameState = await GameState.find({room: room})
     if (existingGameState.length) {
         return existingGameState[0]
     } else {
@@ -26,7 +26,7 @@ const findExistingRoom = async (room) => {
 
 const deleteExistingRoom = async (room) => {
     console.log('in deleteExistingRoom')
-    const deleted = await Game.deleteOne({ room: room})
+    const deleted = await GameState.deleteOne({ room: room})
     console.log(deleted)
     if (deleted.deletedCount === 1) {
         return true

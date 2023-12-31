@@ -1,11 +1,10 @@
-import Game from '../models/Game.js';
 import {
     createInitialGameState,
     deleteExistingRoom,
     findExistingRoom,
     updateGameState
 } from "../database/gameStateQueries.js";
-import { getInitialGameState } from "./boardGenerationUtils.js";
+import { getInitialGameState } from "../utils/boardGenerationUtils.js";
 
 const getGameState = async (room) => {
     console.log('ROOM: ', room)
@@ -16,7 +15,7 @@ const getGameState = async (room) => {
         return existingRoom
     } else {
         const initialGameState = getInitialGameState(3, 3, () => "")
-        const gameState = await createInitialGameState({...initialGameState})
+        const gameState = await createInitialGameState({ ...initialGameState })
         return gameState
     }
 }

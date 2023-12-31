@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const gameSchema = new mongoose.Schema({
+const gameStateSchema = new mongoose.Schema({
     room: {
         type: String,
         default: ''
@@ -29,6 +29,6 @@ const gameSchema = new mongoose.Schema({
     }
 })
 
-const Game = mongoose.models.Game || mongoose.model('Game', gameSchema);
+const GameState = mongoose.models.GameState || mongoose.model('GameState', gameStateSchema);
 
-export default Game;
+export default GameState;

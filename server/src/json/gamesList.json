@@ -1,0 +1,82 @@
+[
+    {
+        "game": "TicTacToe",
+        "category": "Board Game",
+        "type": "Two-Player",
+        "guide": {
+            "objective": "Achieve a line of three of your symbols (X or O) horizontally, vertically, or diagonally on the 3x3 grid.",
+            "gameRules": [
+                "The game is played on a 3x3 grid.",
+                "Two players take turns to place their symbol (X or O) on an empty cell.",
+                "Players alternate turns, starting with 'X.'",
+                "A player's turn consists of placing their symbol on an empty cell.",
+                "The game is won by the first player to get three of their symbols in a row. The row can be horizontal, vertical, or diagonal.",
+                "If the entire grid is filled, and no player has achieved three in a row, the game is a draw."
+            ],
+            "howToPlay": [
+                "Click on an empty cell to place your symbol.",
+                "The game will automatically switch to the next player's turn.",
+                "Pay attention to the grid to spot winning patterns."
+            ],
+            "exampleGrid": "1 | 2 | 3\n---------\n4 | 5 | 6\n---------\n7 | 8 | 9",
+            "winningPatterns": {
+                "horizontal": [
+                    "1-2-3",
+                    "4-5-6",
+                    "7-8-9"
+                ],
+                "vertical": [
+                    "1-4-7",
+                    "2-5-8",
+                    "3-6-9"
+                ],
+                "diagonal": [
+                    "1-5-9",
+                    "3-5-7"
+                ]
+            },
+            "tips": [
+                "Plan ahead to block your opponent and create winning opportunities.",
+                "Pay attention to your opponent's moves to anticipate their strategy.",
+                "Enjoy the game and have fun!"
+            ]
+        }
+    },
+    {
+        "game": "QuicQuacQuad",
+        "category": "Board Game",
+        "type": "Two-Player",
+        "guide": {
+            "objective": "Achieve a line of five of your symbols (X or O) horizontally, vertically, or diagonally on the 8x8 grid.",
+            "gameRules": [
+                "The game is played on an 8x8 grid.",
+                "Two players take turns to drop their symbol (X or O) into one of the columns.",
+                "Symbols are placed in the lowest available empty slot within the chosen column.",
+                "Players alternate turns, starting with 'X.'",
+                "The game is won by the first player to get five of their symbols in a row. The row can be horizontal, vertical, or diagonal.",
+                "If the entire grid is filled, and no player has achieved five in a row, the game is a draw."
+            ],
+            "howToPlay": [
+                "Click on the column where you want to drop your symbol.",
+                "The symbol will fall to the lowest available empty slot in the chosen column.",
+                "Pay attention to the grid to spot winning patterns."
+            ],
+            "winningPatterns": {
+                "horizontal": [
+                    "Five in a row from left to right."
+                ],
+                "vertical": [
+                    "Five in a row from top to bottom."
+                ],
+                "diagonal": [
+                    "Five in a row diagonally."
+                ]
+            },
+            "tips": [
+                "Plan ahead to block your opponent and create winning opportunities.",
+                "Pay attention to the entire grid to anticipate potential winning patterns.",
+                "Enjoy the game and have fun!"
+            ]
+        }
+    }
+]
