@@ -40,7 +40,7 @@ const Dashboard = () => {
                 'flex-row w-screen': isActive === '/'
               },
               {
-                'ml-10 flex-col h-screen': isActive !== '/'
+                'ml-5 mr-4 flex-col h-screen': isActive !== '/'
               },
               {
                 'hidden': inGame

@@ -13,10 +13,10 @@ function NavMenu({ isActive, setIsActive }) {
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ 
-                duration: 1.5, 
-                ease: 'easeOut', 
-                // layout: { type: 'tween', duration: 1} 
+            transition={{
+                duration: 1.5,
+                ease: 'easeOut',
+                layout: { type: 'tween', duration: 1 }
             }}
             className={
                 classNames(

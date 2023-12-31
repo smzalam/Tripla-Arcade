@@ -13,12 +13,13 @@ function Navigation({ isActive }) {
             className=
             {
                 classNames(
+                    "w-full",
                     { 'hidden': isActive === '/' },
                     { 'grid': isActive !== '/' }
                 )
             }
         >
-            <AnimatePresence>
+            <AnimatePresence mode={'wait'}>
                 {isActive === "/guide" && <Guide key={'guide'} />}
                 {isActive === "/choose_games" && <ChooseGame key={'chooseGame'} />}
                 {isActive == "/profile" && <Profile key={'profile'} />}

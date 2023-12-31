@@ -74,10 +74,10 @@ function ChooseGame() {
 
     return (
         <motion.div
-            initial={{ x: "100vw" }}
-            animate={{ x: 0 }}
-            exit={{ y: '-100vh'}}
-            transition={{ duration: 0.5, ease: 'easeOut', type: 'spring', stiffness: 45 }}
+            initial={{ y: "100vh" }}
+            animate={{ y: 0 }}
+            exit={{ y: '-100vh', transition: {duration: 0.2}}}
+            transition={{ ease: 'easeOut', type: 'spring', stiffness: 45 }}
             className='grid overflow-hidden'
         >
             <AnimatePresence mode={'wait'}>
