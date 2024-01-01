@@ -1,7 +1,7 @@
-import Users from '../../models/Users';
+import Users from '../../models/Users.js';
 import bcrypt from 'bcrypt';
 
-const handleNewUser = async (res, user, pwd) => {
+const handleNewUser = async (user, pwd) => {
 
     // checking if user and password exist
     if (!user || !pwd) return {
@@ -10,7 +10,8 @@ const handleNewUser = async (res, user, pwd) => {
     }
 
     // checking for duplicating user
-    const duplicate = Users.findOne({ username: user }).exec();
+    const duplicate = await Users.findOne({ username: user }).exec();
+    console.log('DUPLIATE: ', duplicate)
     if (duplicate) return {
         'status': 409,
         'json': { 'message': 'Username already exists' }

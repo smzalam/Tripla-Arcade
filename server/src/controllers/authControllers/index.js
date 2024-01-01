@@ -1,5 +1,11 @@
-import { handleNewUser } from "./registerControllers";
+import { handleNewUser } from "./registerControllers.js";
+import { handleLogin } from "./loginController.js";
+import { handleRefreshToken } from "./refreshTokenControllers.js";
+import { handleLogout } from "./logoutControllers.js";
 
 export {
-    handleNewUser
+    handleNewUser,
+    handleLogin,
+    handleRefreshToken,
+    handleLogout
 }
