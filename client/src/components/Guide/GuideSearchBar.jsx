@@ -9,8 +9,8 @@ const GuideSearchBar = ({ games, setSearchResults }) => {
 
     const handleSearchChange = (e) => {
         if (!e.target.value) return setSearchResults(games)
-
-        const resultsArray = games.filter(game => game.game.includes(e.target.value) || game.category.includes(e.target.value) || game.type.includes(e.target.value))
+        const lowerCaseValue = e.target.value.toLowerCase();
+        const resultsArray = games.filter(game => game.game.toLowerCase().includes(lowerCaseValue) || game.category.toLowerCase().includes(lowerCaseValue) || game.type.toLowerCase().includes(lowerCaseValue))
     
         setSearchResults(resultsArray)
     }

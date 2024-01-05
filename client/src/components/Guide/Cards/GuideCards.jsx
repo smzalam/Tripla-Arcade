@@ -7,15 +7,12 @@ const GuideCards = ({game, category, type}) => {
                     {game}
                 </h1>
             </div>
-            <div className='group-hover:right-0 transition-all flex flex-col justify-center w-full h-full top-0 -right-[100%] absolute bg-secondary opacity-95 backdrop-blur-sm rounded-[15px] text-white p-[30px]'>
-                <h1 className='uppercase text-[2em] font-bold'>{game}</h1>
-                <section className='bg-purple-500 w-max px-8 py-2 rounded-lg capitalize text-[14px] font-semibold'>{category}</section>
-                <section className='bg-purple
-                sorry
-                
-                -500 w-max px-8 py-2 rounded-lg font-semibold text-[16px]'>{type}</section>
-
-                <button className='w-[120px] text-[#1f3d47] bg-[#8fabba] py-2.5 px-5 rounded-md captialize border-none outline-none font-[500] cursor-pointer '>Look at Guide!</button>
+            <div className='group-hover:right-0 transition-all flex flex-col justify-center place-items-center w-full h-full top-0 -right-[100%] absolute bg-background opacity-95 backdrop-blur-sm rounded-[15px] text-white p-[30px]'>
+                <h1 className='uppercase text-[2em] font-bold mb-5'>{game}</h1>
+                <section className='m-2 bg-yellow-500 w-max py-1 px-4 rounded-lg capitalize text-[14px] font-semibold text-primary'>{category}</section>
+                <section className='m-2 bg-purple-500 w-max py-1 px-4 rounded-lg font-semibold text-[14px] text-text'>{type}</section>
+ 
+                <button className='w-full mt-5 text-text bg-primary py-2.5 px-5 rounded-md captialize border-none outline-none font-[500] cursor-pointer '>Look at Guide!</button>
             </div>
         </div>
     )
