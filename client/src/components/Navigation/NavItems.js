@@ -1,4 +1,4 @@
-import { PuzzlePieceIcon, BookmarkSquareIcon, UserIcon } from '@heroicons/react/24/outline'
+import { PuzzlePieceIcon, BookmarkSquareIcon } from '@heroicons/react/24/outline'
 
 export const NavItems = [
     {
@@ -8,15 +8,15 @@ export const NavItems = [
         imageAlt: 'Games'
     },
     {
-        name: 'uide',
+        name: 'Guide',
         url: '/guide',
         Icon: BookmarkSquareIcon,
         imageAlt: 'Guide'
     },
-    {
-        name: 'Profile',
-        url: '/profile',
-        Icon: UserIcon,
-        imageAlt: 'Profile'
-    },
+    // {
+    //     name: 'Profile',
+    //     url: '/profile',
+    //     Icon: UserIcon,
+    //     imageAlt: 'Profile'
+    // },
 ]

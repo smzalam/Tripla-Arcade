@@ -2,12 +2,17 @@
 import { NavItems } from './NavItems'
 import NavButtons from './Buttons/NavButtons'
 import SettingsButton from './Buttons/SettingsButton'
-import { Cog8ToothIcon } from '@heroicons/react/24/outline'
+import { Cog8ToothIcon, UserIcon, ArrowRightEndOnRectangleIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline'
 import IMAGES from '../../assets/images/images'
 import classNames from 'classnames'
 import { motion } from 'framer-motion';
+import { useNavigationContext } from '../../context/NavigationContext'
+import { useAuthContext } from '../../context/AuthContext'
 
-function NavMenu({ isActive, setIsActive }) {
+function NavMenu() {
+
+    const { isActive, setIsActive } = useNavigationContext();
+    const { isAuth } = useAuthContext();
 
     return (
         <motion.div
@@ -43,7 +48,42 @@ function NavMenu({ isActive, setIsActive }) {
                     </motion.div>
                 )
             })}
+
             <SettingsButton content={'Settings'} Icon={Cog8ToothIcon} imageAlt={'Settings'} imageSrc={IMAGES.settings} />
+            {
+                isAuth ? (
+                    <>
+                        <motion.div initial={{ y: '-55vh' }} animate={{ y: 0 }} transition={{ delay: 1.2, duration: 0.5, type: 'spring', stiffness: 70 }} key={'profile'} className=''>
+                            <NavButtons
+                                isActive={isActive}
+                                setIsActive={setIsActive}
+                                url={'/profile'}
+                                Icon={UserIcon}
+                                imageAlt={'Profile'}
+                            />
+                        </motion.div>
+                        <motion.div initial={{ y: '-55vh' }} animate={{ y: 0 }} transition={{ delay: 1.5, duration: 0.5, type: 'spring', stiffness: 70 }} key={'profile'} className=''>
+                            <NavButtons
+                                isActive={isActive}
+                                setIsActive={setIsActive}
+                                url={'/logout'}
+                                Icon={ArrowLeftStartOnRectangleIcon}
+                                imageAlt={'Logout'}
+                            />
+                        </motion.div>
+                    </>
+                ) : (
+                    <motion.div initial={{ y: '-55vh' }} animate={{ y: 0 }} transition={{ delay: 1.2, duration: 0.5, type: 'spring', stiffness: 70 }} key={'login'} className=''>
+                        <NavButtons
+                            isActive={isActive}
+                            setIsActive={setIsActive}
+                            url={'/login'}
+                            Icon={ArrowRightEndOnRectangleIcon}
+                            imageAlt={'Log In'}
+                        />
+                    </motion.div>
+                )
+            }
         </motion.div>
     )
 }

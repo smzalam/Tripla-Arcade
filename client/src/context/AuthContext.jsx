@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState } from "react";
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 // import { connectCurrentUser, disconnectCurrentUser } from "../lib/steam/api";
 
 const AuthContext = createContext();
@@ -8,9 +8,9 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [isAuth, setIsAuth] = useState(false);
 
-    const cookies = new Cookies();
+    // const cookies = new Cookies();
 
-    const login = () => {
+    // const login = () => {
         // try {
         //     const token = cookies.get("token");
         //     const user = {
@@ -29,8 +29,8 @@ const AuthProvider = ({ children }) => {
         //     console.log(error);
         //     return false;
         // }
-    }
-    const logout = () => {
+    // }
+    // const logout = () => {
         // cookies.remove("token");
         // cookies.remove("userID");
         // cookies.remove("firstName");
@@ -39,14 +39,14 @@ const AuthProvider = ({ children }) => {
         // cookies.remove("channelName");
         // cookies.remove("username");
         // disconnectCurrentUser().then(() => { setIsAuth(false) });
-    }
+    // }
 
     const value = {
-        cookies,
+        // cookies,
         isAuth,
         setIsAuth,
-        logout,
-        login
+        // logout,
+        // login,
     };
 
     return (
@@ -57,4 +57,4 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
-export const useUserContext = () => useContext(AuthContext);
+export const useAuthContext = () => useContext(AuthContext);

@@ -49,7 +49,7 @@ const Dashboard = () => {
           }
         >
           <Home isActive={isActive} setIsActive={setIsActive} />
-          <NavMenu isActive={isActive} setIsActive={setIsActive} />
+          <NavMenu />
 
         </motion.div>
         <Navigation isActive={isActive} />

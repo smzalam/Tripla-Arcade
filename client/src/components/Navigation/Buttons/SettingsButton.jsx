@@ -10,7 +10,7 @@ const SettingsButton = ({ content, Icon }) => {
         <motion.div
             initial={{ y: '-55vh' }}
             animate={{ y: 0 }}
-            transition={{ delay: 1.2, duration: 1, type: 'spring', stiffness: 70 }}
+            transition={{ delay: 0.9, duration: 1, type: 'spring', stiffness: 70 }}
             className="h-full overflow-hidden">
             <SettingsModal modal={modal} setModal={setModal} />
             <button
