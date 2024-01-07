@@ -9,15 +9,16 @@ const GameContext = createContext();
 
 const GameProvider = ({ children }) => {
   const [room, setRoom] = useState('');
-  const gameRoom = useRef('')
+  const gameRoom = useRef('');
   useEffect(() => {
     gameRoom.current = room
   }, [room])
 
   useEffect(() => {
     const sessionID = sessionStorage.getItem('sessionID')
+    const user = sessionStorage.getItem('user')
     if (sessionID) {
-      socket.auth = { sessionID };
+      socket.auth = { sessionID, user };
       socket.connect();
     } else {
       socket.connect()
