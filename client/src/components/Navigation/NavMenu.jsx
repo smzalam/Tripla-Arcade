@@ -2,6 +2,7 @@
 import { NavItems } from './NavItems'
 import NavButtons from './Buttons/NavButtons'
 import SettingsButton from './Buttons/SettingsButton'
+import LogoutButton from './Buttons/LogoutButton'
 import { Cog8ToothIcon, UserIcon, ArrowRightEndOnRectangleIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline'
 import IMAGES from '../../assets/images/images'
 import classNames from 'classnames'
@@ -63,10 +64,10 @@ function NavMenu() {
                             />
                         </motion.div>
                         <motion.div initial={{ y: '-55vh' }} animate={{ y: 0 }} transition={{ delay: 1.5, duration: 0.5, type: 'spring', stiffness: 70 }} key={'profile'} className=''>
-                            <NavButtons
+                            <LogoutButton
                                 isActive={isActive}
                                 setIsActive={setIsActive}
-                                url={'/logout'}
+                                url={'/'}
                                 Icon={ArrowLeftStartOnRectangleIcon}
                                 imageAlt={'Logout'}
                             />
@@ -77,7 +78,7 @@ function NavMenu() {
                         <NavButtons
                             isActive={isActive}
                             setIsActive={setIsActive}
-                            url={'/login'}
+                            url={'/auth'}
                             Icon={ArrowRightEndOnRectangleIcon}
                             imageAlt={'Log In'}
                         />
