@@ -22,7 +22,12 @@ const getRoomSockets = async (server, room) => {
     const sockets = await server.io.in(room).fetchSockets()
     const players = []
     for (const socket of sockets) {
-        players.push(socket.userID)
+        if (socket.userName) {
+            console.log('SOCKET USERNAME: ', socket.userName)
+            players.push(socket.userName)
+        } else {
+            players.push(socket.userID)
+        }
         // console.log(socket.userID)
     }
     console.log('GETROOMSOCKETS: ', players)

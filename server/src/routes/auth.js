@@ -10,7 +10,9 @@ const authRouter = express.Router();
 
 authRouter.post('/register', async (req, res) => {
     const result = await handleNewUser(req.body.user, req.body.pwd);
+    console.log(result)
     res.status(result.status).json(result.json)
+    console.log(res)
 })
 
 authRouter.post('/login', async (req, res) => {
@@ -21,9 +23,7 @@ authRouter.post('/login', async (req, res) => {
 })
 
 authRouter.get('/refresh', async (req, res) => {
-    console.log(req.cookies)
     const result = await handleRefreshToken(req.cookies)
-    console.log(result)
     res.status(result.status).json(result.json)
 })
 

@@ -23,7 +23,9 @@ const createSocket = (app) => {
     });
 
     io.use(async (socket, next) => {
+        console.log(socket.handshake.auth)
         const sessionID = socket.handshake.auth.sessionID;
+        const userName = socket.handshake.auth.user;
         console.log('SOCKETAUTHSESSIONID: ', sessionID)
         if (sessionID) {
             // find existing session
@@ -33,6 +35,9 @@ const createSocket = (app) => {
             if (session) {
                 socket.sessionID = sessionID;
                 socket.userID = session.userID;
+                if (userName) {
+                    socket.userName = userName;
+                }
                 return next();
             }
         }

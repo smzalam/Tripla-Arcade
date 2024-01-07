@@ -35,7 +35,8 @@ app.use(cors(
         //     console.log(allowedOrigins.indexOf('http://127.0.0.1:3001'));
         //     allowedOrigins.indexOf(origin) !== -1 ? callback(null, true) : callback(new Error('Not allowed by CORS'))
         // },
-        optionsSuccessStatus: 200
+        optionsSuccessStatus: 200,
+        credentials: true,
     }
 ))
 

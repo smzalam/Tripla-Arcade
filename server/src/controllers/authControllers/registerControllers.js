@@ -38,7 +38,7 @@ const handleNewUser = async (user, pwd) => {
     } catch (error) {
         return {
             'status': 500,
-            'json': { 'message': error.nessage }
+            'json': { 'message': error.message }
         }
     }
 }
