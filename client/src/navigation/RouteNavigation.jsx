@@ -4,6 +4,7 @@ import ChooseGame from '../pages/ChooseGame'
 import Profile from '../pages/Profile'
 import classNames from 'classnames'
 import { motion, AnimatePresence } from 'framer-motion';
+import AccountForms from '../pages/AccountForms';
 
 function Navigation({ isActive }) {
 
@@ -23,6 +24,7 @@ function Navigation({ isActive }) {
                 {isActive === "/guide" && <Guide key={'guide'} />}
                 {isActive === "/choose_games" && <ChooseGame key={'chooseGame'} />}
                 {isActive == "/profile" && <Profile key={'profile'} />}
+                {isActive == "/auth" && <AccountForms key={'auth'} />}
             </AnimatePresence>
         </motion.div>
     )
